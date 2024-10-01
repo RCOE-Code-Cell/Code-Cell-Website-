@@ -1,7 +1,7 @@
 #!/bin/bash
 ############################################
 # AUTHOR : FAREED SAYED
-# DATE : 22 SEPTEMBER 2024
+# DATE : 01 OCTOBER 2024
 # TO EXECUTE PROPER GITHUB
 ############################################
 
@@ -34,6 +34,15 @@ git add .
 
 # Commit changes again with user-provided message
 git commit -m "$commit_message"
+
+# Run detect-secrets scan
+echo "Running secret check..."
+if detect-secrets scan; then
+    echo "No secrets found."
+else
+    echo "Secrets detected! Please resolve the issues before pushing."
+    exit 1
+fi
 
 # Push changes to origin branch
 git push origin "$branch_name"
