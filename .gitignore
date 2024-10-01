@@ -1,7 +1,9 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*$py.class
+*$py.class\
+
+node_modules
 
 # C extensions
 *.so
@@ -14,7 +16,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -58,7 +59,6 @@ cover/
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
 db.sqlite3-journal
 
 # Flask stuff:
@@ -124,6 +124,8 @@ celerybeat.pid
 # Environments
 .env
 .venv
+myenv
+.myenv
 env/
 venv/
 ENV/
