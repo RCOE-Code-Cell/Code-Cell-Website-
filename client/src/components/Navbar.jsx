@@ -17,7 +17,7 @@ function NavbarUse() {
 
 function Navbar({ className }) {
   const { data: session } = useSession()
-
+  console.log(session)
   const [active, setActive] = useState(null);
 
   return (
