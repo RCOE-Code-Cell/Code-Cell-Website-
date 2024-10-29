@@ -25,6 +25,7 @@ function Navbar({ className }) {
       )}
     >
       <Menu setActive={setActive}>
+        
         <Link href="/">
           <MenuItem setActive={setActive} active={active} item="Home" />
         </Link>
@@ -48,6 +49,12 @@ function Navbar({ className }) {
               href="/About"
               src={img}
               description="Know more about Code Cell RCOE"
+            />
+            <ProductItem
+              title="Team"
+              href="/Team"
+              src={img}
+              description="Meet the team behind Code Cell RCOE"
             />
           </div>
         </MenuItem>

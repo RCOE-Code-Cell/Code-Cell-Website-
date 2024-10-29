@@ -1,0 +1,24 @@
+.leaflet-container{
+    height: 35rem;
+    width: 39vw;
+  overflow-x: hidden;
+
+}
+.map{
+    display: flex;
+
+    justify-content: space-evenly;
+    height: 100vh;
+align-items: center;
+
+    background-image: url("/public/Squares.svg");
+}
+.imgbox{
+   display: flex;
+   justify-content: center;
+align-items: center;
+}
+.vector{
+    width: 30vw;
+}
+
