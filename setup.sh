@@ -133,5 +133,7 @@ else
     npm install -g secretlint
 fi
 
+npm install mini-svg-data-uri
+
 # Installation complete
 echo "Installation complete! Remember to configure your .pre-commit-config.yaml and .secretlintrc.json files for pre-commit and SecretLint."

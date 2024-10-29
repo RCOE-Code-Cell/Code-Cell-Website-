@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  nextjs:
+    build:
+      context: ./client
+    ports:
+      - "3000:3000"  # For frontend
+    volumes:
+      - ./client:/app
+    stdin_open: true
+    tty: true
+    restart: always
+    networks:
+      - code-cell
+    command: ["npm","run","dev"]
+
+
+  django:
+    build:
+      context: ./server
+    container_name: django_server
+    command: ["gunicorn", "server.wsgi:application", "--bind", "0.0.0.0:8000"]
+    volumes:
+      - ./server:/app
+    ports:
+      - "8000:8000"
+    networks:
+      - code-cell
+    depends_on:
+      - nextjs
+
+networks:
+  code-cell:
+    driver: bridge
