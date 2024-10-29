@@ -8,9 +8,12 @@ fi
 echo "Activating the virtual environment..."
 . ./venv/bin/activate
 
-echo "Installing detect secret to initialize pre commit hook ..."
+# Install detect-secrets
+echo "Installing detect-secrets..."
 pip install detect-secrets
-detect-secrets scan > .secrets.baseline
 
-echo "for first state.. to check secrets "
+# Initialize and audit secrets
+echo "Scanning for secrets..."
+detect-secrets scan > .secrets.baseline
+echo "Auditing for secrets..."
 detect-secrets audit .secrets.baseline
