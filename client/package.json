@@ -24,6 +24,7 @@
     "react-element-to-jsx-string": "^15.0.0",
     "react-hot-toast": "^2.4.1",
     "react-leaflet": "^4.2.1",
+    "react-qr-code": "^2.0.15",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7"
   },

@@ -2,8 +2,12 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import QRCode from "react-qr-code";
+import { useSession ,signOut} from 'next-auth/react';
+
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
  function QRComp() {
+  const { data: session } = useSession()
  
     return (
         <div>
@@ -13,9 +17,21 @@ import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
           <div
             className={cn(
               " cursor-pointer overflow-hidden  relative card h-96 rounded-lg shadow-xl  max-w-sm mx-auto backgroundImage flex flex-col justify-between p-4",
-              "bg-[url(https://images.unsplash.com/photo-1544077960-604201fe74bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1651&q=80)] bg-cover"
+              // "bg-[url(https://chart.googleapis.com/chart?cht=qr&chs=180x180&chl=https://youtube.com)] bg-cover"
             )}
-          >
+            >
+            <div style={{ height: "auto", margin: "0 auto", Width: 128, width: "100%" }}>
+            {session?.user?.email ? (
+  <QRCode
+    size={512}
+    value={session.user.email}
+    viewBox={`0 0 1024 1024`}
+    className="h-[100%] w-[100%]"
+  />
+) : (
+  <div className="text-center text-gray-500">No email available</div>
+)}
+            </div>
             {/* <div className="absolute w-full h-full top-0 left-0 transition duration-300 group-hover/card:bg-black opacity-60"></div> */}
             <div className="flex flex-row items-center space-x-4 z-10">
              
