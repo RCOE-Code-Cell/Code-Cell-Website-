@@ -2,32 +2,28 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import QRCode from "react-qr-code";
-import { useSession ,signOut} from 'next-auth/react';
 
+import { useSession ,signOut} from 'next-auth/react';
+import {QRCodeSVG} from 'qrcode.react';
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
  function QRComp() {
   const { data: session } = useSession()
- 
+
     return (
         <div>
 
        
-        <div className="max-w-xs w-full group/card bg-[#010203] p-2 rounded-lg">
+        <div className="max-w-xs w-full group/card bg-[#050A10] p-2 rounded-lg">
           <div
             className={cn(
-              " cursor-pointer overflow-hidden  relative card h-96 rounded-lg shadow-xl  max-w-sm mx-auto backgroundImage flex flex-col justify-between p-4",
+              " cursor-pointer overflow-hidden  relative card h-96 rounded-lg shadow-xl  max-w-sm mx-auto backgroundImage flex flex-col justify-between p-4 bg-white",
               // "bg-[url(https://chart.googleapis.com/chart?cht=qr&chs=180x180&chl=https://youtube.com)] bg-cover"
             )}
             >
-            <div style={{ height: "auto", margin: "0 auto", Width: 128, width: "100%" }}>
+            <div  >
             {session?.user?.email ? (
-  <QRCode
-    size={512}
-    value={session.user.email}
-    viewBox={`0 0 1024 1024`}
-    className="h-[100%] w-[100%]"
-  />
+
+  <QRCodeSVG className="w-full h-full " value={session?.user?.email} />
 ) : (
   <div className="text-center text-gray-500">No email available</div>
 )}
