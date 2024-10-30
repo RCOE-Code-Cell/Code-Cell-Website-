@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
  function GalleryPics() {
   return (
     <div className="mt-16">
-        <div className="h-[40rem] flex items-center justify-center w-full flex-wrap ">
+        <div className="h-screen flex items-center justify-center w-full flex-wrap ">
       <CardStack items={CARDS} />
       <CardStack items={CARDS} />
       <CardStack items={CARDS} />
