@@ -1,6 +1,6 @@
 from django.urls import  path
-from .views import  *
+from .views import  EventViews
 
 urlpatterns = [
-    path('', hello, name='hello'),
+    path('event', EventViews.as_view()),
 ]
