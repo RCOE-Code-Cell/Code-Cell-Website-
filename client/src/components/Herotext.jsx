@@ -53,6 +53,7 @@ function HeroText() {
           <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
         </button>
       </div>
+      <a href="https://www.linkedin.com/company/code-cell-rcoe/">
       <div className="flex justify-center">
         <button className=" bg-slate-800 no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px text-s font-semibold leading-6 text-white">
           <span className="absolute inset-0 overflow-hidden rounded-full">
@@ -65,6 +66,7 @@ function HeroText() {
           <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
         </button>
       </div>
+      </a>
       </div>
     </div>
   );
