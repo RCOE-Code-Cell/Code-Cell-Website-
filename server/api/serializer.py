@@ -16,6 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
             'password',
             'confirm_password',
             'otp',
+            'is_staff'
             ]
         extra_kwargs = {
             'password': {'write_only': True},
