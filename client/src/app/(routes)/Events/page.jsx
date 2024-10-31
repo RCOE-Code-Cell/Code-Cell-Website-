@@ -15,7 +15,7 @@ export const projects = [
     {
       title: "Workshop on Web Development",
       description:
-        "A workshop conducted by Code Cell RCOE in Engineering College to teach web development skills.",
+        "A workshop conducted by Code Cell RCOE in Engineering College to teach web development skills .",
      
     },
     {
