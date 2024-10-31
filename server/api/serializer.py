@@ -4,10 +4,12 @@ from django.core.mail import send_mail
 import random
 import datetime
 from django.utils import timezone
+from events.serializers import EventsRegisteredSerializer
 
 class UserSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
     otp = serializers.CharField(write_only=True, required=False)
+    event_registered =  EventsRegisteredSerializer(many=True, read_only=True)
     class Meta:
         model = User
         fields = [
@@ -17,6 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
             'confirm_password',
             'otp',
             'is_staff'
+            'event_registered'
             ]
         extra_kwargs = {
             'password': {'write_only': True},

@@ -1,5 +1,5 @@
 from django.urls import  path
-from .views import  EventListView, EventGalleryView
+from .views import  EventListView, EventGalleryView, EventRegisteredViews
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import  staticfiles_urlpatterns
@@ -9,6 +9,7 @@ from django.contrib.staticfiles.urls import  staticfiles_urlpatterns
 urlpatterns = [
     path('event', EventListView.as_view()),
     path('events/<int:pk>/gallery/', EventGalleryView.as_view(), name='event-gallery'),
+    path('events/<int:pk>/registered/', EventRegisteredViews.as_view(), name='event')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

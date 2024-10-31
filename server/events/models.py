@@ -1,4 +1,5 @@
 from django.db import models
+from api.models import User
 
 class Event(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
@@ -18,3 +19,16 @@ class Image(models.Model):
 
     def __str__(self):
         return f"Image for {self.gallery.name}"
+
+
+class EventsRegistered(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    registration_date = models.DateField(auto_now_add=True)
+    registration_status = models.CharField(max_length=255, null=True, blank=True)
+    payment_status = models.CharField(max_length=255, null=True, blank=True)
+    payment_date = models.DateField(null=True, blank=True)
+    payment_method = models.CharField(max_length=255, null=True, blank=True)
+
+    def  __str__(self):
+        return f"{self.user.username} registered for {self.event.name}"
