@@ -18,11 +18,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app/
 
 # Set environment variables from build arguments
-# ARG DJANGO_SECRET_KEY
-# ARG DJANGO_DEBUG
-# ARG EMAIL_HOST_USER
-# ARG EMAIL_HOST_PASSWORD
-# ARG GOOGLE_API_KEY
+ARG DJANGO_SECRET_KEY
+ARG DJANGO_DEBUG
+ARG EMAIL_HOST_USER
+ARG EMAIL_HOST_PASSWORD
+ARG GOOGLE_API_KEY
 
 # Set environment variables in the container
 ENV DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
