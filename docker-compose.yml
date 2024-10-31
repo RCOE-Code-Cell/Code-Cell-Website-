@@ -5,7 +5,7 @@ services:
     build:
       context: ./client
     ports:
-      - "3000:3000"
+      - "3000:3000"  # For frontend
     volumes:
       - ./client:/app
     stdin_open: true
