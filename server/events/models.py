@@ -11,3 +11,10 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
+class Image(models.Model):
+    gallery = models.ForeignKey(Event, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='galleries/', null=True, blank=True)
+
+    def __str__(self):
+        return f"Image for {self.gallery.name}"
