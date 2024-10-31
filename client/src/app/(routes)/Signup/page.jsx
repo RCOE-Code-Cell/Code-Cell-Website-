@@ -1,9 +1,9 @@
 import React from 'react'
-import Login from "@/components/Login";
+import SignUp from "@/components/Signup";
 function page() {
   return (
     <div className='mt-[20%] sm:mt-[5%]'>
-      <Login></Login>
+      <SignUp></SignUp>
     </div>
   )
 }

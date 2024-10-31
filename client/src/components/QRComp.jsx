@@ -2,12 +2,14 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useUserContext } from '@/app/context/Userinfo';
 
 import { useSession ,signOut} from 'next-auth/react';
 import {QRCodeSVG} from 'qrcode.react';
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
  function QRComp() {
   const { data: session } = useSession()
+  const {contextemail} = useUserContext();
 
     return (
         <div>
@@ -21,9 +23,9 @@ import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
             )}
             >
             <div  >
-            {session?.user?.email ? (
+            {session?.user?.email||contextemail ? (
 
-  <QRCodeSVG className="w-full h-full " value={session?.user?.email} />
+  <QRCodeSVG className="w-full h-full " value={session?.user?.email||contextemail} />
 ) : (
   <div className="text-center text-gray-500">No email available</div>
 )}

@@ -6,6 +6,7 @@ import img from '../../public/CC_RCOE.png';
 import Link from "next/link";
 import { useSession ,signOut} from 'next-auth/react';
 import UserIcon from '@/components/UserIcon';
+import { useUserContext } from '@/app/context/Userinfo';
 
 function NavbarUse() {
   return (
@@ -17,9 +18,11 @@ function NavbarUse() {
 
 function Navbar({ className }) {
   const { data: session } = useSession()
-  console.log(session)
+  const {contextisLoggedIn} = useUserContext();
   const [active, setActive] = useState(null);
-
+  const Logout =()=>{
+    localStorage.setItem('authToken', "-")
+  }
   return (
     <div
       className={cn(
@@ -65,10 +68,10 @@ function Navbar({ className }) {
             />
           </div>
         </MenuItem>
-        {session ? (
+        {session||contextisLoggedIn ? (
 
           
-        <button className="bg-slate-800 no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px text-s font-semibold leading-6 text-white inline-block" onClick={() => signOut()}>
+        <button className="bg-slate-800 no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px text-s font-semibold leading-6 text-white inline-block" onClick={() => signOut()&&Logout()}>
           <span className="absolute inset-0 overflow-hidden rounded-full">
             <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
           </span>
@@ -124,7 +127,7 @@ function Navbar({ className }) {
 
         )}
         {
-          session?(
+          session||contextisLoggedIn?(
             <div className="pl-1">
           <UserIcon></UserIcon>
         </div>

@@ -3,17 +3,20 @@ import React from "react";
 import Link from "next/link";
 import { useSession ,signOut} from 'next-auth/react';
 import { AnimatedTooltip } from "./ui/animated-tooltip";
+import { useUserContext } from '@/app/context/Userinfo';
 
 
 
  function UserIcon() {
   const { data: session } = useSession()
+  const {contextname,contextemail,contextimg} = useUserContext();
+
   const people = [
     {
     id: 1,
-    name: session?.user.name,
-    designation: session?.user.email,
-    image:session?.user.image,
+    name: session?.user.name||contextname,
+    designation: session?.user.email||contextemail,
+    image:session?.user.image||contextimg,
   }
   ]
   
