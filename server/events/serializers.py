@@ -43,5 +43,6 @@ class EventSerializer(serializers.ModelSerializer):
             'profile_image',
             'registration_fees',
             'images',
+            'status'
             # 'event_registered_event',
         ]
