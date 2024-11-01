@@ -22,7 +22,7 @@ class Image(models.Model):
 
 
 class EventsRegistered(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='event_registered')
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='event_registered_event')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='event_registered')
     registration_date = models.DateField(auto_now_add=True)
     registration_status = models.CharField(max_length=255, null=True, blank=True)
@@ -31,4 +31,4 @@ class EventsRegistered(models.Model):
     payment_method = models.CharField(max_length=255, null=True, blank=True)
 
     def  __str__(self):
-        return f"{self.user.username} registered for {self.event.name}"
+        return f"{self.user.email} registered for {self.event.name}"

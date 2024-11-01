@@ -29,7 +29,7 @@ class EventsRegisteredSerializer(serializers.ModelSerializer):
 
 
 class EventSerializer(serializers.ModelSerializer):
-    event_registered = EventsRegisteredSerializer()
+    # event_registered_event = EventsRegisteredSerializer()
     images = ImageSerializer(many=True, read_only=True)  # Include images in the event serializer
 
     class Meta:
@@ -43,5 +43,5 @@ class EventSerializer(serializers.ModelSerializer):
             'profile_image',
             'registration_fees',
             'images',
-            'event_registered',
+            # 'event_registered_event',
         ]
