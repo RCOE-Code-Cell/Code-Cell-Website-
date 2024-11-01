@@ -80,3 +80,8 @@ Endpoint : api/event
 
 ## Get request
 will get tht list of all events 
+
+
+Endpoint : /api/even/{id}
+## Get Request
+will get the data of that particular event... of that id 

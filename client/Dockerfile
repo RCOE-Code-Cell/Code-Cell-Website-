@@ -10,6 +10,7 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 RUN npm install mini-svg-data-uri
+RUN npx shadcn@latest add toast
 
 
 # Install Next.js globally (optional, but recommended)
