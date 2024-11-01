@@ -6,22 +6,6 @@ class ImageSerializer(serializers.ModelSerializer):
         model = Image
         fields = ['id', 'image']
 
-class EventSerializer(serializers.ModelSerializer):
-    images = ImageSerializer(many=True, read_only=True)  # Include images in the event serializer
-
-    class Meta:
-        model = Event
-        fields = [
-            'id',
-            'name',
-            'description',
-            'date',
-            'location',
-            'profile_image',
-            'registration_fees',
-            'images',  # Add images to the event serializer
-        ]
-
 class EventsRegisteredSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventsRegistered
@@ -42,3 +26,22 @@ class EventsRegisteredSerializer(serializers.ModelSerializer):
             'payment_date': {'required': False, 'allow_null': True},
             'payment_method': {'required': False, 'allow_null': True},
         }
+
+
+class EventSerializer(serializers.ModelSerializer):
+    event_registered = EventsRegisteredSerializer()
+    images = ImageSerializer(many=True, read_only=True)  # Include images in the event serializer
+
+    class Meta:
+        model = Event
+        fields = [
+            'id',
+            'name',
+            'description',
+            'date',
+            'location',
+            'profile_image',
+            'registration_fees',
+            'images',
+            'event_registered',
+        ]

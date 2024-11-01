@@ -22,8 +22,8 @@ class Image(models.Model):
 
 
 class EventsRegistered(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='event_registered')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='event_registered')
     registration_date = models.DateField(auto_now_add=True)
     registration_status = models.CharField(max_length=255, null=True, blank=True)
     payment_status = models.CharField(max_length=255, null=True, blank=True)

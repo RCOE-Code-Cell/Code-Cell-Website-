@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event, Image
+from .models import Event, Image, EventsRegistered
 
 class ImageInline(admin.TabularInline):
     model = Image
@@ -14,3 +14,4 @@ class EventAdmin(admin.ModelAdmin):
 admin.site.register(Event, EventAdmin)
 # Register the Image model (optional, as it's managed through the Event admin)
 admin.site.register(Image)
+admin.site.register(EventsRegistered)
