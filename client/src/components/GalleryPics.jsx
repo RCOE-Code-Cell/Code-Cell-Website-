@@ -27,12 +27,6 @@ function GalleryPics() {
     GetEvents();
   }, []);
 
-  events.forEach(event => {
-    event.images.forEach(image => {
-      console.log(image.image)
-    })
-  });
-
   return (
     <div className="flex flex-wrap justify-center mt-16">
       {events.length > 0 ? (
@@ -42,36 +36,24 @@ function GalleryPics() {
               <div className="max-w-xs w-full group/card" key={image.id}>
                 <div
                   className={cn(
-                    "cursor-pointer overflow-hidden relative card h-96 rounded-md shadow-xl max-w-sm mx-auto backgroundImage flex flex-col justify-between p-4 bg-cover"
-                     
+                    "cursor-pointer overflow-hidden relative card h-96 rounded-md shadow-xl max-w-sm mx-auto bg-cover transition-all duration-300 m-5"
                   )}
+                  style={{ backgroundImage: `url('http://127.0.0.1:8000${image.image}')` }}
                 >
-                  <img src={`http://127.0.0.1:8000${image.image}` }>
-                  
-                  </img>
-                  <div className="absolute w-full h-full top-0 left-0 transition duration-300 group-hover/card:bg-black opacity-60"></div>
-                  <div className="flex flex-row items-center space-x-4 z-10">
-                    {/* You can place event-related content here if needed */}
-                  </div>
-                  <div className="text content">
-                    <h1 className="font-bold text-xl md:text-2xl text-gray-50 relative z-10">
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover/card:opacity-40 transition-opacity duration-300"></div> {/* Background overlay */}
+                  <div className="absolute inset-0 flex flex-col justify-end  items-center text-white p-4 z-10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+                    <h1 className="font-bold text-xl md:text-2xl">
                       {event.name || "Event Title"}
                     </h1>
-                    <p className="font-normal text-sm text-gray-50 relative z-10 my-4">
-                      {event.description || "Event Description"}
+                    <p className="font-normal text-sm md:text-base">
+                      {event.date || "Event Date"}
                     </p>
                   </div>
-
-                  
                 </div>
               </div>
             ))
           ) : (
-            <div className="max-w-xs w-full group/card" key={event.id}>
-              <div className="cursor-pointer h-96 flex items-center justify-center border border-gray-300 rounded-md">
-                <p className="text-gray-500">No images available for this event.</p>
-              </div>
-            </div>
+            ''
           )
         ))
       ) : (
