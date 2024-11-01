@@ -32,7 +32,7 @@ function HeroText() {
           <Image src={image} alt="Aceternity Logo" width={300} height={150} />
           
         </div>
-        <div className={`${isMobile ? "text-center" : "text-left"}`}>
+        <div className={`${isMobile ? "ml-10 text-4xl relative" : "text-left"}`}>
           Beta 
           <FlipWords  words={words} /> <br />
           Baap hu

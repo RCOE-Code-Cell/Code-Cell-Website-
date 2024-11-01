@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
+import { badgeVariants } from "@/components/ui/badge"
 
 export const HoverEffect = ({
   items,
@@ -35,7 +36,12 @@ export const HoverEffect = ({
                 }} />
             )}
           </AnimatePresence>
-          <Card>
+          <Card>{
+            item.status =="upcoming"?(<div className={badgeVariants({ variant:"outline"  })}>Upcoming</div>)
+          
+          :(<div className={badgeVariants({ variant:"secondary"  })}>Done</div>)
+          }
+          
             <CardTitle>{item.title}</CardTitle>
             <CardDescription>{item.description}</CardDescription>
           </Card>
