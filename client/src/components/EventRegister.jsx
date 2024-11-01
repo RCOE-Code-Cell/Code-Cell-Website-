@@ -56,7 +56,7 @@ import { useToast } from "@/hooks/use-toast"
 
   return (
     (<div className="flex sm:flex-col">
-      <BackgroundGradient className="rounded-[22px]  p-4 sm:p-10 bg-white dark:bg-zinc-900 sm:flex">
+      <BackgroundGradient className="rounded-[22px]  p-4 sm:p-10 bg-white dark:bg-[#04080D] sm:flex">
         <Image
           src={`https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`}
           alt="jordans"
@@ -96,7 +96,7 @@ import { useToast } from "@/hooks/use-toast"
               ></path>
             </svg>
           </div>
-          <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
+          <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-[#0CE4EF] via-[#04080D] to-[#0CE4EF] transition-opacity duration-500 group-hover:opacity-40"></span>
         </button>
           </div>
         
