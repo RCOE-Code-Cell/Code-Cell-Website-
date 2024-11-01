@@ -9,9 +9,9 @@ export const HoverEffect = ({ items, className }) => {
 
   return (
     <div className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10 gap-7", className)}>
-      {items.map((item, idx) => (
+      {items.slice().reverse().map((item, idx) => (
         <Link
-          href={`RegisterEvents/${item.name}`}
+          href={`RegisterEvents/${item.id}`}
           key={item.id}
           className="relative group block p-2 h-full w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
