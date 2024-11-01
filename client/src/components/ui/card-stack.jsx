@@ -55,7 +55,7 @@ export const CardStack = ({
               {card.name}
             </p>
             <p className="text-neutral-400 font-normal dark:text-neutral-200">
-              {card.designation}
+              {card.event}
             </p>
           </div>
         </motion.div>

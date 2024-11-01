@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavbarUse from "@/components/Navbar";
 import SessionWrapper from '@/components/SessionWrapper'
-
+import { Toaster } from "@/components/ui/toaster";
 import { UserProvider } from '@/app/context/Userinfo';
 
 const geistSans = localFont({
@@ -46,6 +46,7 @@ export default function RootLayout({
           </div>
           </SessionWrapper>
         </main>
+        <Toaster /> 
         </UserProvider>
       </body>
     </html>

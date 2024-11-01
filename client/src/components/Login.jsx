@@ -3,7 +3,7 @@ import { useUserContext } from '@/app/context/Userinfo';
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast"
 
-// import { useToast } from "@/components/ui/use-toast";
+
 import { IconBrandGithub, IconBrandGoogle, IconBrandOnlyfans } from "@tabler/icons-react";
 import Link from "next/link";
 
@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 
 import {useRouter} from "next/navigation"
 import { useSession, signIn } from 'next-auth/react';
-import toast from "react-hot-toast";
+
 function Login() {
   const { data: session } = useSession()
 
@@ -44,7 +44,10 @@ function Login() {
           
           );
       if (!response.ok) {
-        
+        toast({
+          title: "There was an error",
+         
+        })
         throw new Error('Failed to fetch user info'); // Handle error properly
         
       }
@@ -62,6 +65,10 @@ function Login() {
       }
       
     } catch (error) {
+      toast({
+        title: "There was an error",
+       
+      })
       console.error("Error fetching user info:", error);
     }
     
@@ -152,7 +159,10 @@ function Login() {
     
   }
   if (session) {
-    toast.success('You are logged in!')
+    toast({
+      title: "You are Successfully Logged In",
+     
+    });  
     contextsetName(session.user.name);
     contextsetEmail(session.user.email);
     OAuth();

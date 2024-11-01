@@ -6,10 +6,10 @@ import img1 from '@/app/IMAGES/Codeathon_1.jpg'
   return (
     <div className="mt-16">
         <div className="h-screen flex items-center justify-center w-full flex-wrap ">
-      <CardStack items={CARDS} />
-      <CardStack items={CARDS} />
-      <CardStack items={CARDS} />
-      <CardStack items={CARDS} />
+      <CardStack items={CARDS_SET_1} />
+      <CardStack items={CARDS_SET_2} />
+      <CardStack items={CARDS_SET_3} />
+      <CardStack items={CARDS_SET_1} />
     </div>
     </div>
     
@@ -32,26 +32,65 @@ export const Highlight = ({
   );
 };
 
-const CARDS = [
-  {
-    id: 0,
-    name: "Manu Arora",
-    designation: "Senior Software Engineer",
-    img:"https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+const CARDS_SET_1 = [
+  { 
+    id: 0, 
+    name: "Alice Johnson", 
+    event: "Hackathon 2023", 
+    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
   },
-  {
-    id: 1,
-    name: "Elon Musk",
-    designation: "Senior Shitposter",
-    img:"https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-
+  { 
+    id: 1, 
+    name: "Bob Smith", 
+    event: "Hackathon 2023", 
+    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
   },
-  {
-    id: 2,
-    name: "Tyler Durden",
-    designation: "Manager Project Mayhem",
-    img:"https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-
-  },
+  { 
+    id: 2, 
+    name: "Catherine Lee", 
+    event: "Hackathon 2023", 
+    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+  }
 ];
+const CARDS_SET_2 = [
+  { 
+    id: 0, 
+    name: "David Martinez", 
+    event: "AI Workshop", 
+    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+  },
+  { 
+    id: 1, 
+    name: "Eva Green", 
+    event: "AI Workshop", 
+    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+  },
+  { 
+    id: 2, 
+    name: "Frank Turner", 
+    event: "AI Workshop", 
+    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+  }
+];
+const CARDS_SET_3 = [
+  { 
+    id: 0, 
+    name: "Grace Hopper", 
+    event: "Web Development Bootcamp", 
+    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+  },
+  { 
+    id: 1, 
+    name: "Henry Ford", 
+    event: "Web Development Bootcamp", 
+    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+  },
+  { 
+    id: 2, 
+    name: "Ivy Taylor", 
+    event: "Web Development Bootcamp", 
+    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+  }
+];
+
 export default GalleryPics;
