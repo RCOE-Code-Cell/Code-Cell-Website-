@@ -1,9 +1,11 @@
+"use client"
 import React from 'react'
-
+import { useUserContext } from '@/app/context/Userinfo';
 function page() {
+  const {contextQRInfo} = useUserContext(); // Updated hook
   return (
     <div>
-      hello
+      {contextQRInfo}
     </div>
   )
 }

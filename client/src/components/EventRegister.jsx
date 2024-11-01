@@ -12,6 +12,48 @@ import { useToast } from "@/hooks/use-toast"
       title: "Registered",
       description: "You have successfully registered for the event",
   })}
+
+  const GetEvents = async () => {
+    
+    try {
+        const response = await fetch('http://127.0.0.1:8000/api/event', 
+        {
+            method: 'GET',
+            headers: {
+              'Content-Type': "application/json",
+            },
+          }
+          
+          );
+      if (!response.ok) {
+        toast({
+          title: "There was an error",
+         
+        })
+        throw new Error('Failed to fetch user info'); // Handle error properly
+        
+      }
+      if (response.ok){
+        const result = await response.json();
+
+        console.log(result[0]?.profile_image)
+
+      }
+      
+    } catch (error) {
+      toast({
+        title: "There was an error",
+       
+      })
+      
+    }
+    
+   
+  };
+
+  GetEvents()
+
+
   return (
     (<div className="flex sm:flex-col">
       <BackgroundGradient className="rounded-[22px]  p-4 sm:p-10 bg-white dark:bg-zinc-900 sm:flex">

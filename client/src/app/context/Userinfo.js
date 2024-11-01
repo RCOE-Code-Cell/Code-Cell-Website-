@@ -7,7 +7,7 @@ const UserContext = createContext({
   contextname: '',
   contextpassword: '',
   contextisLoggedIn: false,
-
+  contextQRInfo:'',
   contextimg: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
 
   
@@ -16,13 +16,15 @@ const UserContext = createContext({
   contextsetName: () => {},
   contextsetPassword: () => {},
   contextsetIsLoggedIn: () => {},
-//   contextsetimg: () => {},
+  contextsetQRInfo: () => {},
+  contextsetimg: () => {},
 });
 
 export const UserProvider = ({ children }) => {
   const [contextemail, contextsetEmail] = useState('');
   const [contextname, contextsetName] = useState('');
   const [contextpassword, contextsetPassword] = useState('');
+  const [contextQRInfo, contextsetQRInfo] = useState('');
   const [contextisLoggedIn, contextsetIsLoggedIn] = useState(false);
   const [contextimg, contextsetimg] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
 
@@ -37,7 +39,9 @@ export const UserProvider = ({ children }) => {
     contextsetName,
     contextsetPassword,
     contextsetIsLoggedIn,
-    contextsetimg
+    contextsetimg,
+    contextQRInfo,
+    contextsetQRInfo
   };
 
   return (

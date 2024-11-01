@@ -2,12 +2,12 @@
 import { useUserContext } from '@/app/context/Userinfo';
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast"
-
+import { useEffect } from 'react';
 
 import { IconBrandGithub, IconBrandGoogle, IconBrandOnlyfans } from "@tabler/icons-react";
 import Link from "next/link";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -20,6 +20,7 @@ function Login() {
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const { contextsetIsLoggedIn,contextsetEmail,contextsetName,contextemail,contextname} = useUserContext(); // Updated hook
   const [loggedin,setLoggedin]=useState()
   const { toast } = useToast();
@@ -112,25 +113,80 @@ function Login() {
     }
   };
 
-  const OAuth = async()=>{
+  // const OAuth = async()=>{
+  //   try {
+  //     const response = await fetch('http://127.0.0.1:8000/api/oauth2/login/', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       credentials: 'include',
+  //       body: JSON.stringify({ name, email }),
+  //       if( response){
+  //         console.log(name,email)
+  //         router.push('/')
+  //         toast({
+  //           title: "You are Successfully Logged In",
+           
+  //         });  
+  //       }
+  //     },
+    
+  //   );
+
+    
+  //   } catch (error) {
+  //     toast({
+  //       title: "An error occurred",
+  //     });
+  //     console.error("Error submitting form:", error);
+  //   }
+  // }
+
+
+  const OAuth = async () => {
+    
+
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/oauth2/login/field', {
+      const response = await fetch('http://127.0.0.1:8000/api/oauth2/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify({ contextemail, contextname }),
+        body: JSON.stringify({ name, email }),
       });
 
-    
+      if (!response.ok) {
+        toast({
+          title: "Error From backend While Login ",
+        });
+        return;
+      }
+      else{
+        console.log(name,email)
+                router.push('/')
+                toast({
+                  title: "You are Successfully Logged In",
+                 
+                });  
+      }
+
+      const result = await response.json();
+      if (response.ok) {
+
+          
+        localStorage.setItem('authToken', result.jwt);
+        Getuserinfo()
+  }
     } catch (error) {
       toast({
         title: "An error occurred",
       });
       console.error("Error submitting form:", error);
     }
-  }
+  };
+
 
   async function loginWithGoogle() {
     setLoading(true);
@@ -158,15 +214,16 @@ function Login() {
     }
     
   }
-  if (session) {
-    toast({
-      title: "You are Successfully Logged In",
-     
-    });  
-    contextsetName(session.user.name);
-    contextsetEmail(session.user.email);
-    OAuth();
-router.push('/')}
+  useEffect(() => {
+
+    if (session) {
+    
+      setName(session.user.name);
+      setEmail(session.user.email);
+      OAuth();
+  }
+  }, [session]);
+  
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-[#050A0F] mt-[7%]">

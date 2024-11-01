@@ -6,7 +6,7 @@ import image from '../../public/CC_logo.png';
 import { Instagram } from 'lucide-react';
 import { Linkedin } from 'lucide-react';
 function HeroText() {
-  const words = ["better", "cute", "beautiful", "modern"];
+  const words = ["Solutions", "Ideas", "Innovation", "Creativity"];
   const [isMobile, setIsMobile] = useState(false);
 
   // Function to update the layout based on screen width
@@ -32,10 +32,10 @@ function HeroText() {
           <Image src={image} alt="Aceternity Logo" width={300} height={150} />
           
         </div>
-        <div className={`${isMobile ? "ml-10 text-4xl relative" : "text-left"}`}>
-          Beta 
+        <div className={`${isMobile ? "ml-5 sm:ml-0 text-3xl relative" : "text-left"}`}>
+          Empowering  
           <FlipWords  words={words} /> <br />
-          Baap hu
+          Through Collaborative Coding.
         </div>
       </div>
       <div className="flex gap-8">
