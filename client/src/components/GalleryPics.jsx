@@ -1,96 +1,84 @@
 "use client";
-import { CardStack } from "./ui/card-stack";
 import { cn } from "@/lib/utils";
-import img1 from '@/app/IMAGES/Codeathon_1.jpg'
- function GalleryPics() {
+import { useState, useEffect } from "react";
+
+function GalleryPics() {
+  const [events, setEvents] = useState([]); // Initialize as an empty array
+
+  useEffect(() => {
+    const GetEvents = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/event', {
+          method: 'GET',
+          headers: {
+            'Content-Type': "application/json",
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch events');
+        }
+        const result = await response.json();
+        setEvents(result);
+      } catch (error) {
+        console.error("There was an error:", error);
+      }
+    };
+
+    GetEvents();
+  }, []);
+
+  events.forEach(event => {
+    event.images.forEach(image => {
+      console.log(image.image)
+    })
+  });
+
   return (
-    <div className="mt-16">
-        <div className="h-screen flex items-center justify-center w-full flex-wrap ">
-      <CardStack items={CARDS_SET_1} />
-      <CardStack items={CARDS_SET_2} />
-      <CardStack items={CARDS_SET_3} />
-      <CardStack items={CARDS_SET_1} />
+    <div className="flex flex-wrap justify-center mt-16">
+      {events.length > 0 ? (
+        events.map((event) => (
+          event.images.length > 0 ? (
+            event.images.map((image) => (
+              <div className="max-w-xs w-full group/card" key={image.id}>
+                <div
+                  className={cn(
+                    "cursor-pointer overflow-hidden relative card h-96 rounded-md shadow-xl max-w-sm mx-auto backgroundImage flex flex-col justify-between p-4 bg-cover"
+                     
+                  )}
+                >
+                  <img src={`http://127.0.0.1:8000${image.image}` }>
+                  
+                  </img>
+                  <div className="absolute w-full h-full top-0 left-0 transition duration-300 group-hover/card:bg-black opacity-60"></div>
+                  <div className="flex flex-row items-center space-x-4 z-10">
+                    {/* You can place event-related content here if needed */}
+                  </div>
+                  <div className="text content">
+                    <h1 className="font-bold text-xl md:text-2xl text-gray-50 relative z-10">
+                      {event.name || "Event Title"}
+                    </h1>
+                    <p className="font-normal text-sm text-gray-50 relative z-10 my-4">
+                      {event.description || "Event Description"}
+                    </p>
+                  </div>
+
+                  
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="max-w-xs w-full group/card" key={event.id}>
+              <div className="cursor-pointer h-96 flex items-center justify-center border border-gray-300 rounded-md">
+                <p className="text-gray-500">No images available for this event.</p>
+              </div>
+            </div>
+          )
+        ))
+      ) : (
+        <p className="text-gray-500">No events available.</p>
+      )}
     </div>
-    </div>
-    
   );
 }
-
-// Small utility to highlight the content of specific section of a testimonial content
-export const Highlight = ({
-  children,
-  className
-}) => {
-  return (
-    (<span
-      className={cn(
-        "font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-700/[0.2] dark:text-emerald-500 px-1 py-0.5",
-        className
-      )}>
-      {children}
-    </span>)
-  );
-};
-
-const CARDS_SET_1 = [
-  { 
-    id: 0, 
-    name: "Alice Johnson", 
-    event: "Hackathon 2023", 
-    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-  },
-  { 
-    id: 1, 
-    name: "Bob Smith", 
-    event: "Hackathon 2023", 
-    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-  },
-  { 
-    id: 2, 
-    name: "Catherine Lee", 
-    event: "Hackathon 2023", 
-    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-  }
-];
-const CARDS_SET_2 = [
-  { 
-    id: 0, 
-    name: "David Martinez", 
-    event: "AI Workshop", 
-    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-  },
-  { 
-    id: 1, 
-    name: "Eva Green", 
-    event: "AI Workshop", 
-    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-  },
-  { 
-    id: 2, 
-    name: "Frank Turner", 
-    event: "AI Workshop", 
-    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-  }
-];
-const CARDS_SET_3 = [
-  { 
-    id: 0, 
-    name: "Grace Hopper", 
-    event: "Web Development Bootcamp", 
-    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-  },
-  { 
-    id: 1, 
-    name: "Henry Ford", 
-    event: "Web Development Bootcamp", 
-    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-  },
-  { 
-    id: 2, 
-    name: "Ivy Taylor", 
-    event: "Web Development Bootcamp", 
-    img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-  }
-];
 
 export default GalleryPics;
