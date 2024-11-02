@@ -174,11 +174,7 @@ export const Card = ({
   };
 
 
-card.images.forEach(img => {
- {
-    console.log(img.image);
-  }
-});
+
 
   const Content = () => {
     return (
