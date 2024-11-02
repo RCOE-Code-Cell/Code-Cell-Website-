@@ -82,6 +82,18 @@ Endpoint : api/event
 will get tht list of all events 
 
 
-Endpoint : /api/even/{id}
+Endpoint : /api/event/{id}
 ## Get Request
 will get the data of that particular event... of that id 
+
+# Team 
+team_name = {tech, management, marketing}
+
+
+role = {member, core, head}
+
+
+Endpoint : /api/team/team_name/role/
+
+## GET request 
+will get the list of the team member of the particular domain and of their particular role 
