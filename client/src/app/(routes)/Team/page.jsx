@@ -1,46 +1,246 @@
+"use client";
 import Image from "next/image";
 import React from "react";
+import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
 import { Timeline } from "@/components/ui/timeline";
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
 function Page() {
+  const [tech, setTech] = useState([]);
+  const [management, setManagement] = useState([]);
+  const [marketing, setMakreting] = useState([]);
+  const [tech1, setTech1] = useState([]);
+  const [management1, setManagement1] = useState([]);
+  const [marketing1, setMakreting1] = useState([]);
+  useEffect(() => {
+    if (tech !== null) {
+      const GetTechTeam = async () => {
+        try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/team/tech/core`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': "application/json",
+            },
+          });
+          if (!response.ok) {
+            toast({
+              title: "There was an error",
+            });
+            throw new Error('Failed to fetch user info');
+          }
+          if (response.ok) {
+            const result = await response.json();
+           setTech(result)
+          }
+        } catch (error) {
+          toast({
+            title: "There was an error",
+          });
+        }
+      };
+      GetTechTeam();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (tech !== null) {
+      const GetTechTeam1 = async () => {
+        try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/team/tech/member`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': "application/json",
+            },
+          });
+          if (!response.ok) {
+            toast({
+              title: "There was an error",
+            });
+            throw new Error('Failed to fetch user info');
+          }
+          if (response.ok) {
+            const result = await response.json();
+            setTech1(result)
+          }
+        } catch (error) {
+          toast({
+            title: "There was an error",
+          });
+        }
+      };
+      GetTechTeam1();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (management !== null) {
+      const GetManagementTeam = async () => {
+        try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/team/management/core`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': "application/json",
+            },
+          });
+          if (!response.ok) {
+            toast({
+              title: "There was an error",
+            });
+            throw new Error('Failed to fetch user info');
+          }
+          if (response.ok) {
+            const result = await response.json();
+            setManagement(result)
+          }
+        } catch (error) {
+          toast({
+            title: "There was an error",
+          });
+        }
+      };
+      GetManagementTeam();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (management !== null) {
+      const GetManagementTeam1 = async () => {
+        try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/team/management/member`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': "application/json",
+            },
+          });
+          if (!response.ok) {
+            toast({
+              title: "There was an error",
+            });
+            throw new Error('Failed to fetch user info');
+          }
+          if (response.ok) {
+            const result = await response.json();
+            setManagement1(result)
+          }
+        } catch (error) {
+          toast({
+            title: "There was an error",
+          });
+        }
+      };
+      GetManagementTeam1();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (marketing !== null) {
+      const GetMarketingTeam = async () => {
+        try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/team/marketing/core`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': "application/json",
+            },
+          });
+          if (!response.ok) {
+            toast({
+              title: "There was an error",
+            });
+            throw new Error('Failed to fetch user info');
+          }
+          if (response.ok) {
+            const result = await response.json();
+            setMakreting(result)
+          }
+        } catch (error) {
+          toast({
+            title: "There was an error",
+          });
+        }
+      };
+      GetMarketingTeam();
+    }
+  }, []);
+
+
+ 
+  useEffect(() => {
+    if (marketing !== null) {
+      const GetMarketingTeam1 = async () => {
+        try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/team/marketing/member`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': "application/json",
+            },
+          });
+          if (!response.ok) {
+            toast({
+              title: "There was an error",
+            });
+            throw new Error('Failed to fetch user info');
+          }
+          if (response.ok) {
+            const result = await response.json();
+            setMakreting1(result)
+          }
+        } catch (error) {
+          toast({
+            title: "There was an error",
+          });
+        }
+      };
+      GetMarketingTeam1();
+    }
+  }, []);
+
+
+
   const data = [
     {
-      title: "Tech Team",
+      title: "Technology Team",
       content: (
         <div>
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
             The Tech team is responsible for developing innovative solutions and ensuring smooth technical operations.
           </p>
-          <div className="grid grid-cols-2 gap-4">
-            <Image
-              src="https://assets.aceternity.com/templates/startup-1.webp"
-              alt="startup template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/templates/startup-2.webp"
-              alt="startup template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/templates/startup-3.webp"
-              alt="startup template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/templates/startup-4.webp"
-              alt="startup template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center">
+            {tech.map((item, index) => (
+             <div className=" group/card" key={item.id}>
+             <div
+               className={cn(
+"cursor-pointer overflow-hidden relative card rounded-lg shadow-xl",
+  "h-[250px] w-[250px]", // Base square size
+  "sm:h-[280px] sm:w-[280px]", // Small screens
+  "md:h-[300px] md:w-[300px]", // Medium screens
+  "mx-auto my-3", // Consistent spacing
+  "bg-cover bg-center bg-no-repeat",
+  "transition-all duration-300"               )}
+               style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}${item.profile_image}')` }}
+             >
+               <div className="absolute inset-0 bg-black opacity-0 group-hover/card:opacity-40 transition-opacity duration-300"></div> {/* Background overlay */}
+               <div className="absolute inset-0 flex flex-col justify-end  items-center text-white p-4 z-10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+                 <h1 className="font-bold text-xl md:text-2xl">
+                   {item.name || "Event Title"}
+                 </h1>
+                 <p className="font-normal text-sm md:text-base">
+                   {item.about || "Event Date"}
+                 </p>
+               </div>
+             </div>
+           </div>
+
+            ))}
+           
+           
+            </div>
+            <div
+      className=" rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-auto">
+      <InfiniteMovingCards items={tech1} direction="right"  />
+    </div>
+           
+          
         </div>
       ),
     },
@@ -51,36 +251,38 @@ function Page() {
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
             The Management team oversees project execution, resource allocation, and team coordination.
           </p>
-          <div className="grid grid-cols-2 gap-4">
-            <Image
-              src="https://assets.aceternity.com/pro/hero-sections.png"
-              alt="hero template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/features-section.png"
-              alt="feature template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/pro/bento-grids.png"
-              alt="bento template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/cards.png"
-              alt="cards template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center">
+          {management.map((item, index) => (
+             <div className=" group/card" key={item.id}>
+             <div
+               className={cn(
+"cursor-pointer overflow-hidden relative card rounded-lg shadow-xl",
+  "h-[250px] w-[250px]", // Base square size
+  "sm:h-[280px] sm:w-[280px]", // Small screens
+  "md:h-[300px] md:w-[300px]", // Medium screens
+  "mx-auto my-3", // Consistent spacing
+  "bg-cover bg-center bg-no-repeat",
+  "transition-all duration-300"               )}
+               style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}${item.profile_image}')` }}
+             >
+               <div className="absolute inset-0 bg-black opacity-0 group-hover/card:opacity-40 transition-opacity duration-300"></div> {/* Background overlay */}
+               <div className="absolute inset-0 flex flex-col justify-end  items-center text-white p-4 z-10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+                 <h1 className="font-bold text-xl md:text-2xl">
+                   {item.name || "Event Title"}
+                 </h1>
+                 <p className="font-normal text-sm md:text-base">
+                   {item.about || "Event Date"}
+                 </p>
+               </div>
+             </div>
+           </div>
+
+            ))}
           </div>
+          <div
+      className=" rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+      <InfiniteMovingCards items={management1} direction="right"  />
+    </div>
         </div>
       ),
     },
@@ -91,36 +293,38 @@ function Page() {
           <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
             The Marketing team is focused on promoting our initiatives and engaging the community.
           </p>
-          <div className="grid grid-cols-2 gap-4">
-            <Image
-              src="https://assets.aceternity.com/pro/hero-sections.png"
-              alt="hero template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/features-section.png"
-              alt="feature template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/pro/bento-grids.png"
-              alt="bento template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/cards.png"
-              alt="cards template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center">
+          {marketing.map((item, index) => (
+             <div className=" group/card" key={item.id}>
+             <div
+               className={cn(
+"cursor-pointer overflow-hidden relative card rounded-lg shadow-xl",
+  "h-[250px] w-[250px]", // Base square size
+  "sm:h-[280px] sm:w-[280px]", // Small screens
+  "md:h-[300px] md:w-[300px]", // Medium screens
+  "mx-auto my-3", // Consistent spacing
+  "bg-cover bg-center bg-no-repeat",
+  "transition-all duration-300"               )}
+               style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}${item.profile_image}')` }}
+             >
+               <div className="absolute inset-0 bg-black opacity-0 group-hover/card:opacity-40 transition-opacity duration-300"></div> {/* Background overlay */}
+               <div className="absolute inset-0 flex flex-col justify-end  items-center text-white p-4 z-10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+                 <h1 className="font-bold text-xl md:text-2xl">
+                   {item.name || "Event Title"}
+                 </h1>
+                 <p className="font-normal text-sm md:text-base">
+                   {item.about || "Event Date"}
+                 </p>
+               </div>
+             </div>
+           </div>
+
+            ))}
           </div>
+          <div
+      className=" rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+      <InfiniteMovingCards items={marketing1} direction="right"  />
+    </div>
         </div>
       ),
     },
@@ -128,12 +332,13 @@ function Page() {
 
   return (
     <div>
-<div className="flex flex-col gap-4">
+<div className="flex flex-col gap-4 mt-5">
 
       <Timeline data={data} />
     </div>    
     <div className="h-[60vh]">
       </div>  
+      
     </div>
     
   );

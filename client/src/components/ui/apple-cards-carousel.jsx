@@ -196,7 +196,7 @@ export const Card = ({
               className="bg-[#F5F5F7] dark:bg-neutral-800 p-8 md:p-14 rounded-3xl mb-4">
               
               <img
-                src={`http://127.0.0.1:8000${image.image}`}
+                src={`${process.env.NEXT_PUBLIC_API_URL}${image.image}`}
                 alt="Event example image"
                 height="500"
                 width="500"
@@ -256,7 +256,7 @@ export const Card = ({
   className="relative rounded-3xl bg-gray-100 dark:bg-neutral-900 h-80 w-56 md:h-[40rem] md:w-96 overflow-hidden">
   <div className="absolute inset-0 h-full w-full">
     <BlurImage
-      profile_image={`http://127.0.0.1:8000${card.profile_image}`}
+      profile_image={`${process.env.NEXT_PUBLIC_API_URL}${card.profile_image}`}
       alt={card.name}
       className="h-full w-full object-cover"
     />

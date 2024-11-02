@@ -66,7 +66,7 @@ function EventReg() {
       {img && (
         <BackgroundGradient className="rounded-[22px] p-4 sm:p-10 bg-white dark:bg-[#04080D] sm:flex">
           <img
-            src={`http://127.0.0.1:8000${img}`}
+            src={`${process.env.NEXT_PUBLIC_API_URL}${img}`}
             alt="Event"
             height="400"
             width="400"

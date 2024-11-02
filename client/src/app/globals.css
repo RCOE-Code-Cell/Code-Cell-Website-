@@ -78,4 +78,18 @@ body {
   .text-balance {
     text-wrap: balance; /* Ensure this property is needed */
   }
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50%));
+  }
+}
+
+.animate-scroll {
+  animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+}
+
 }
