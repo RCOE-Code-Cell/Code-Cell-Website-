@@ -15,9 +15,9 @@ const [member,setMember] = useState(false)
 
   const GetUserInfo = async () => {
     const token = localStorage.getItem('authToken');
-    
+
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/user', 
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`,
         {
             method: 'GET',
             headers: {
@@ -25,22 +25,22 @@ const [member,setMember] = useState(false)
               'Content-Type': "application/json",
             },
           }
-          
+
           );
-    
+
       if (response.ok){
         const result = await response.json();
 
-        
+
         setMember(result.is_staff)
       }
-      
+
     } catch (error) {
-      
-      
+
+
     }
-    
-   
+
+
   };
 
   GetUserInfo()
@@ -48,7 +48,7 @@ const [member,setMember] = useState(false)
     return (
         <div>
 
-       
+
         <div className="max-w-xs w-full group/card bg-[#050A10] p-2 rounded-lg">
           <div
             className={cn(
@@ -66,10 +66,10 @@ const [member,setMember] = useState(false)
             </div>
             {/* <div className="absolute w-full h-full top-0 left-0 transition duration-300 group-hover/card:bg-black opacity-60"></div> */}
             <div className="flex flex-row items-center space-x-4 z-10">
-             
-            
+
+
             </div>
-            
+
           </div>
           <div className="text content">
               <h1 className="font-bold text-xl md:text-2xl text-gray-50 relative z-10">
@@ -106,8 +106,8 @@ const [member,setMember] = useState(false)
         <div className="mt-5">
           {
             !member?(
-<Link href='/Scanner'> 
-          
+<Link href='/Scanner'>
+
           <button className="bg-slate-800 no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px text-s font-semibold leading-6 text-white inline-block" >
             <span className="absolute inset-0 overflow-hidden rounded-full">
               <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
@@ -136,14 +136,14 @@ const [member,setMember] = useState(false)
 
             ):('')
           }
-          
+
         </div>
-        
+
         </div>
         <div className="m-40 flex justify-center text-center">
-     
+
     </div>
-   
+
         </div>
       );
 }

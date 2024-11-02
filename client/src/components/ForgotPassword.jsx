@@ -24,10 +24,9 @@ function ForgotPass() {
   const [otp, setotp] = useState("");
 
   const handleSubmit = async () => {
-    
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/password-reset/",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/password-reset/`,
         {
           method: "POST",
           headers: {
@@ -60,7 +59,7 @@ function ForgotPass() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/password-reset-request/",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/password-reset-request/`,
         {
           method: "POST",
           headers: {

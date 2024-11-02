@@ -51,7 +51,7 @@ const { data: session } = useSession()
     }
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/register', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ const { data: session } = useSession()
 
   async function loginWithGoogle() {
     setLoading(true);
-    
+
     try {
       await signIn('google')
     } catch (error) {
@@ -109,11 +109,11 @@ const { data: session } = useSession()
     } finally {
       setLoading(false)
     }
-    
+
   }
   async function loginWithGithub() {
     setLoading(true);
-   
+
     try {
       await signIn('github')
     } catch (error) {
@@ -122,7 +122,7 @@ const { data: session } = useSession()
     } finally {
       setLoading(false)
     }
-    
+
   }
   if (session) {
     toast.success('You are logged in!')
@@ -134,7 +134,7 @@ router.push('/')}
     loadings == true ?<div className="w-full h-[60vh] flex items-center justify-center">
     {/* Core Loader Modal */}
     <Loader loadingStates={loadingStates} loading={loadings} duration={1000} />
-  
+
   </div> :''
   }
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
@@ -198,7 +198,7 @@ router.push('/')}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </LabelInputContainer>
-      
+
         <button
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           type="submit"
@@ -216,11 +216,11 @@ router.push('/')}
             <BottomGradient />
           </button>
         </Link>
-       
+
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
         <div className="flex flex-col space-y-4">
-          
+
           <button onClick={loginWithGoogle}
             className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
             type="button"

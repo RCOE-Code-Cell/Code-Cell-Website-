@@ -9,7 +9,7 @@ function HomeEventCard() {
   useEffect(() => {
     const GetEvents = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/event', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/event`, {
           method: 'GET',
           headers: {
             'Content-Type': "application/json",

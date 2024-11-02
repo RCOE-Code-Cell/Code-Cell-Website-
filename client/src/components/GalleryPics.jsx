@@ -8,7 +8,7 @@ function GalleryPics() {
   useEffect(() => {
     const GetEvents = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/event', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/event`, {
           method: 'GET',
           headers: {
             'Content-Type': "application/json",
@@ -38,7 +38,7 @@ function GalleryPics() {
                   className={cn(
                     "cursor-pointer overflow-hidden relative card h-96 rounded-md shadow-xl max-w-sm mx-auto bg-cover transition-all duration-300 m-5"
                   )}
-                  style={{ backgroundImage: `url('http://127.0.0.1:8000${image.image}')` }}
+                  style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}${image.image}')` }}
                 >
                   <div className="absolute inset-0 bg-black opacity-0 group-hover/card:opacity-40 transition-opacity duration-300"></div> {/* Background overlay */}
                   <div className="absolute inset-0 flex flex-col justify-end  items-center text-white p-4 z-10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">

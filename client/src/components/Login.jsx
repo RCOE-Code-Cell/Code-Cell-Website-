@@ -33,7 +33,7 @@ function Login() {
   const Getuserinfo = async () => {
     const token = localStorage.getItem('authToken');
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/user', 
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`,
         {
             method: 'GET',
             headers: {
@@ -42,15 +42,15 @@ function Login() {
             },
             credentials: 'include',
           }
-          
+
           );
       if (!response.ok) {
         toast({
           title: "There was an error",
-         
+
         })
         throw new Error('Failed to fetch user info'); // Handle error properly
-        
+
       }
       if (response.ok){
         const result = await response.json();
@@ -60,20 +60,20 @@ function Login() {
       contextsetName(result.name)
       toast({
         title: "You are Successfully Logged In",
-       
-      });         
+
+      });
       router.push("/")
       }
-      
+
     } catch (error) {
       toast({
         title: "There was an error",
-       
+
       })
       console.error("Error fetching user info:", error);
     }
-    
-   
+
+
   };
 
 
@@ -82,7 +82,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/login', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ function Login() {
       const result = await response.json();
       if (response.ok) {
 
-          
+
         localStorage.setItem('authToken', result.jwt);
         Getuserinfo()
   }
@@ -115,7 +115,7 @@ function Login() {
 
   // const OAuth = async()=>{
   //   try {
-  //     const response = await fetch('http://127.0.0.1:8000/api/oauth2/login/', {
+  //     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/oauth2/login/`, {
   //       method: 'POST',
   //       headers: {
   //         'Content-Type': 'application/json',
@@ -127,14 +127,14 @@ function Login() {
   //         router.push('/')
   //         toast({
   //           title: "You are Successfully Logged In",
-           
-  //         });  
+
+  //         });
   //       }
   //     },
-    
+
   //   );
 
-    
+
   //   } catch (error) {
   //     toast({
   //       title: "An error occurred",
@@ -145,10 +145,10 @@ function Login() {
 
 
   const OAuth = async () => {
-    
+
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/oauth2/login/', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/oauth2/login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -168,14 +168,14 @@ function Login() {
                 router.push('/')
                 toast({
                   title: "You are Successfully Logged In",
-                 
-                });  
+
+                });
       }
 
       const result = await response.json();
       if (response.ok) {
 
-          
+
         localStorage.setItem('authToken', result.jwt);
         Getuserinfo()
   }
@@ -190,7 +190,7 @@ function Login() {
 
   async function loginWithGoogle() {
     setLoading(true);
-    
+
     try {
       await signIn('google')
     } catch (error) {
@@ -199,11 +199,11 @@ function Login() {
     } finally {
       setLoading(false)
     }
-    
+
   }
   async function loginWithGithub() {
     setLoading(true);
-   
+
     try {
       await signIn('github')
     } catch (error) {
@@ -212,18 +212,18 @@ function Login() {
     } finally {
       setLoading(false)
     }
-    
+
   }
   useEffect(() => {
 
     if (session) {
-    
+
       setName(session.user.name);
       setEmail(session.user.email);
       OAuth();
   }
   }, [session]);
-  
+
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-[#050A0F] mt-[7%]">
@@ -263,10 +263,10 @@ function Login() {
         </Link>
         <Label htmlFor="password">Don't have an account ?</Label>
         <Link href='/Signup'>
-        
+
         <button
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-          
+
         >
           SignUp &rarr;
           <BottomGradient />
@@ -276,7 +276,7 @@ function Login() {
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
         <div className="flex flex-col space-y-4">
-          
+
           <button
             className="relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
             type="button" onClick={loginWithGoogle}// Changed type to "button"

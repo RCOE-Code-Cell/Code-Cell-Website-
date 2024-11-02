@@ -10,7 +10,7 @@ import { useToast } from "@/hooks/use-toast"
 
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-  
+
 function OTP() {
   const router = useRouter();
   const {contextpassword,contextsetPassword,contextsetIsLoggedIn,contextsetEmail,contextsetName}= useUserContext();
@@ -22,7 +22,7 @@ const password =contextpassword;
 const Getuserinfo = async () => {
   const token = localStorage.getItem('authToken');
   try {
-      const response = await fetch('http://127.0.0.1:8000/api/user', 
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`,
       {
           method: 'GET',
           headers: {
@@ -31,12 +31,12 @@ const Getuserinfo = async () => {
           },
           credentials: 'include',
         }
-        
+
         );
     if (!response.ok) {
-      
+
       throw new Error('Failed to fetch user info'); // Handle error properly
-      
+
     }
     if (response.ok){
       const result = await response.json();
@@ -50,11 +50,11 @@ const Getuserinfo = async () => {
 
     });
     }
-    
+
   } catch (error) {
     console.error("Error fetching user info:", error);
   }
- 
+
 };
 
 
@@ -62,9 +62,9 @@ const Getuserinfo = async () => {
 
 
   const Autologin=async()=>{
-    
-      
-      const response = await fetch('http://127.0.0.1:8000/api/login', {
+
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const Getuserinfo = async () => {
       body: JSON.stringify({
         email,
         password,
-        
+
       }),
     })
     if (!response.ok) {
@@ -80,17 +80,17 @@ const Getuserinfo = async () => {
         title: "Some error happend",
       });
     }
-    
+
     const result = await response.json();
     if (response.ok) {
-      
+
       localStorage.setItem('authToken', result.jwt);
       Getuserinfo()
       changetoHome();
       contextsetPassword,("");
-      
+
     }
-    
+
     }
 
 
@@ -106,7 +106,7 @@ const Getuserinfo = async () => {
     const[otp,setOtp]=useState('')
     const handleSubmit=async(e)=>{
         e.preventDefault();
-        const response = await fetch('http://127.0.0.1:8000/api/register', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/register`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -115,26 +115,26 @@ const Getuserinfo = async () => {
           email,
           otp,
         }),
-        
+
       })
       console.log(email,otp)
       if (!response.ok) {
         toast({
           title: "Wrong OTP",
         });
-        
+
       }
       if (response.ok){
-        
+
         Autologin();
         }
-      
-      
+
+
     }
   return (
   <form  onSubmit={handleSubmit}>
     <div className="flex items-center justify-center min-h-screen ">
-        
+
       <div className="p-4 bg-black shadow-md rounded-xl border border-neutral-500 border-dashed w-[30%] h-[50vh] flex  flex-col items-center justify-center">
     <div className='text-neutral-500 font-bold text-xl m-4'>
         {`The OTP has been sent to  ${contextemail}  Please enter the OTP below`}
@@ -144,7 +144,7 @@ const Getuserinfo = async () => {
           <InputOTPGroup >
             <InputOTPSlot index={0} />
             <InputOTPSlot index={1} />
-            
+
           </InputOTPGroup>
           <InputOTPSeparator />
           <InputOTPGroup>
@@ -155,7 +155,7 @@ const Getuserinfo = async () => {
       </div>
 
 
-      
+
       <button
         className="relative group/btn flex items-center justify-center px-4 w-[50%] text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
         type="Submit"
@@ -166,7 +166,7 @@ const Getuserinfo = async () => {
         <BottomGradient />
       </button>
     </div>
-    
+
     </div>
 </form>
   )

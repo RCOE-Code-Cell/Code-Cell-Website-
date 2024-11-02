@@ -16,6 +16,7 @@
     "@tabler/icons-react": "^3.21.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
     "framer-motion": "^11.11.10",
     "html5-qrcode": "^2.1.5",
     "input-otp": "^1.2.5",
