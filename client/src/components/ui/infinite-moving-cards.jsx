@@ -30,7 +30,7 @@ export const InfiniteMovingCards = ({
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [items]); // Added items dependency to re-run when items change
+  }, [items, direction, speed]); // Added direction and speed dependencies
 
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
@@ -55,7 +55,7 @@ export const InfiniteMovingCards = ({
               style="background-image: url('${process.env.NEXT_PUBLIC_API_URL}${item.profile_image}')"
             >
               <div class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <div class="flex h-full flex-col justify-end p-4">
+                <div class="flex h-full flex-col justify-end sm:p-4 p-8">
                   <h3 class="text-lg font-bold text-white">
                     ${item.name || "Event Title"}
                   </h3>
@@ -79,7 +79,7 @@ export const InfiniteMovingCards = ({
   const getDirection = () => {
     if (containerRef.current) {
       if (direction === "left") {
-        containerRef.current.style.setProperty("--animation-direction", "forwards");
+        containerRef.current.style.setProperty("--animation-direction", "normal");
       } else {
         containerRef.current.style.setProperty("--animation-direction", "reverse");
       }
@@ -88,13 +88,15 @@ export const InfiniteMovingCards = ({
 
   const getSpeed = () => {
     if (containerRef.current) {
+      let duration;
       if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
+        duration = "15s";
       } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "40s");
+        duration = "40s";
       } else {
-        containerRef.current.style.setProperty("--animation-duration", "80s");
+        duration = "80s";
       }
+      containerRef.current.style.setProperty("--animation-duration", duration);
     }
   };
 
@@ -104,32 +106,30 @@ export const InfiniteMovingCards = ({
             Team Members
         </div>
         
-  <div className="relative sm:max-w-4xl max-w-[75.5vw] bg-black">
-    <div
-      ref={containerRef}
-      className={classNames(
-        "scroller relative z-20 [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
-        className
-      )}
-    >
-      <ul
-        ref={scrollerRef}
-        className={classNames(
-          "flex min-w-full gap-4 py-4",
-          start && "animate-scroll",
-          pauseOnHover && "hover:[animation-play-state:paused]"
-        )}
-        style={{
-          "--animation-duration": "40s",
-          "--animation-direction": "forwards"
-        }}
-      />
+        <div className="relative sm:max-w-4xl max-w-[75.5vw] bg-black">
+            <div
+                ref={containerRef}
+                className={classNames(
+                    "scroller relative z-20 [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+                    className
+                )}
+                style={{
+                    "--animation-duration": "40s",
+                    "--animation-direction": "forwards"
+                }}
+            >
+                <ul
+                    ref={scrollerRef}
+                    className={classNames(
+                        "flex min-w-full gap-4 py-4",
+                        start && "animate-scroll",
+                        pauseOnHover && "hover:[animation-play-state:paused]"
+                    )}
+                />
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-
   );
 };
-
 
 export default InfiniteMovingCards;
