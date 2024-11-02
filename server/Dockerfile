@@ -1,33 +1,41 @@
-# Dockerfile for Django
+# Use Node.js 20 image
+FROM node:20-alpine
 
-# Use the official Python image from the Docker Hub
-FROM python:3.11
-
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-# Set the working directory to /app
+# Set working directory
 WORKDIR /app
 
-# Install dependencies
-COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-# Copy the entire project into the container
-COPY . /app/
+# Install dependencies
+RUN npm install
+RUN npm install mini-svg-data-uri
+RUN npx shadcn@latest add toast
+
+# Install Next.js globally (optional, but recommended)
+RUN npm install -g next
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose ports
+EXPOSE 3000
 
 # Set environment variables from build arguments
-ARG EMAIL_HOST_USER
-ARG EMAIL_HOST_PASSWORD
+ARG NEXTAUTH_SECRET
+ARG NEXT_PUBLIC_API_URL
+ARG GITHUB_ID
+ARG GITHUB_SECRET
+ARG GOOGLE_CLIENT_ID
+ARG GOOGLE_CLIENT_SECRET
 
 # Set environment variables in the container
-ENV EMAIL_HOST_USER=$EMAIL_HOST_USER
-ENV EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD
+ENV NEXTAUTH_SECRET=$NEXTAUTH_SECRET
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ENV GITHUB_ID=$GITHUB_ID
+ENV GITHUB_SECRET=$GITHUB_SECRET
+ENV GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID
+ENV GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET
 
-# Run Django migrations and collect static files (if needed)
-RUN python manage.py migrate
-RUN python manage.py collectstatic --noinput
-
-# Start the server
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "server.wsgi:application"]
+# Use concurrently to run both npm commands (optional)
+CMD ["npm", "run", "dev"]
