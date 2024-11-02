@@ -13,7 +13,7 @@ function Footer() {
       name: "Fareed Sayyed",
       designation: "Backend Developer",
       image:
-        "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3387&q=80",
+        "https://avatars.githubusercontent.com/u/143815597?v=4",
     },
     {
       id: 2,
@@ -34,7 +34,7 @@ function Footer() {
         alt="College Entrance"
         className='overflow-hidden'
       />
-     
+
     </div>
      <div className="flex justify-center items-center overflow-auto w-[40vw] ">
      <Map />
@@ -79,7 +79,7 @@ function Footer() {
       </div>
 
 
- 
+
 
     </footer>
 
