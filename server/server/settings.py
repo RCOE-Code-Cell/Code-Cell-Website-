@@ -22,8 +22,8 @@ DEBUG = False
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    '0.0.0.0'
-    'https://code-cell-website-fv8m.onrender.com'
+    '0.0.0.0',
+    'https://code-cell-website-fv8m.onrender.com',
     ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
