@@ -61,7 +61,7 @@ function Footer() {
       <AnimatedTooltip items={people} />
     </div>
             <p>
-              <strong>Email:</strong> nutriscanofficial@gmail.com
+              <strong>Email:</strong> codecellrcoe@gmail.com
             </p>
             <p>
               <strong>Address:</strong> Rizvi Educational Complex Off Carter Road, Sherly Rajan Rd, Bandra West, Mumbai, Maharashtra 400050
