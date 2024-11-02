@@ -17,19 +17,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     '0.0.0.0'
+    'https://code-cell-website-fv8m.onrender.com'
     ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    'https://code-cell-website-1-r8b5.onrender.com',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
+    'https://code-cell-website-1-r8b5.onrender.com',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -42,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
     'events',
-    'teams'
+    'teams',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
