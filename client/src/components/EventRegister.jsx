@@ -72,11 +72,11 @@ function EventReg() {
             width="400"
             className="object-contain sm:w-[30%] rounded-lg sm:h-[60vh]"
           />
-          <div className="sm:m-10">
+          <div className="sm:m-5">
             <p className="text-base sm:text-3xl text-black mt-4 mb-2 dark:text-neutral-200 font-bold">
               {title}
             </p>
-            <p className="text-sm text-neutral-600 dark:text-neutral-400 sm:my-[10%] sm:text-lg">
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 sm:my-[1%] sm:text-lg">
               {desc}
             </p>
             {

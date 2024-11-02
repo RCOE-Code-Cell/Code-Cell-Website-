@@ -10,7 +10,7 @@ import { useUserContext } from '@/app/context/Userinfo';
 
 function NavbarUse() {
   return (
-    <div className="relative max-w-2xl flex items-center justify-between z-100 p-2 md:p-4">
+    <div className="relative max-w-2xl flex items-center justify-between z-100 ">
       <Navbar className="top-2" />
     </div>
   );

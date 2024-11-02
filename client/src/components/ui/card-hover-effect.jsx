@@ -41,7 +41,7 @@ export const HoverEffect = ({ items, className }) => {
               <div className={badgeVariants({ variant: "secondary" })}>Done</div>
             )}
             <CardTitle>{item.name}</CardTitle>
-            <CardDescription>{item.description}</CardDescription>
+            <CardDescription>{item.date}</CardDescription>
           </Card>
         </Link>
       ))}

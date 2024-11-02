@@ -2,10 +2,37 @@
 import Image from "next/image";
 import React from "react";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
-
+import { useState, useEffect } from "react";
 function HomeEventCard() {
-  const cards = data.map((card, index) => (
-    <Card key={card.src} card={card} index={index} />
+  const [events, setEvents] = useState([]); // Initialize as an empty array
+
+  useEffect(() => {
+    const GetEvents = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/event', {
+          method: 'GET',
+          headers: {
+            'Content-Type': "application/json",
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch events');
+        }
+        const result = await response.json();
+        setEvents(result);
+      } catch (error) {
+        console.error("There was an error:", error);
+      }
+    };
+
+    GetEvents();
+  }, []);
+
+console.log(events);
+
+
+  const cards = events.map((event, index) => (
+    <Card key={event.id} card={event} index={index} />
   ));
 
   return (
