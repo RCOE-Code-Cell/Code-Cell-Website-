@@ -1,11 +1,11 @@
-"use client"
-import React, {useEffect} from 'react';
+import React from 'react'
 import { useUserContext } from '@/app/context/Userinfo';
 import { useToast } from "@/hooks/use-toast"
-const Layout = ({ children }) => {
-    const { toast } = useToast();
 
-    const {contextsetIsLoggedIn,contextsetEmail,contextsetName,contextisLoggedIn}= useUserContext();
+function page() {
+  const { toast } = useToast();
+
+    const {contextsetIsLoggedIn,contextsetEmail,contextsetName}= useUserContext();
 
     const getUserInfo = async () => {
         const token = localStorage.getItem('authToken');
@@ -42,25 +42,7 @@ const Layout = ({ children }) => {
             variant: "destructive",
           });
         }
-       
       };
-      useEffect(() => {
-        if(contextisLoggedIn==false){
-            getUserInfo()
-        }
-        
-      },[contextisLoggedIn])
-    return (
-        <div>
-           
-            <main>
-                {children}
-            </main>
-            <footer>
-                {/* Add your footer content here */}
-            </footer>
-        </div>
-    );
-};
+}
 
-export default Layout;
+export default page
