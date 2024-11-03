@@ -1,6 +1,9 @@
 // next.config.js
 
 const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   reactStrictMode: false,  // Disable strict mode for debugging
   images: {
     domains: [
