@@ -2,10 +2,17 @@
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { useUserContext } from '@/app/context/Userinfo';
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-
+import { MultiStepLoader as Loader } from "@/components/ui/multi-step-loader";
+const loadingStates = [
+  { text: "Retrieving Account Details" },
+  { text: "Verifying Your Identity" },
+  { text: "Generating Secure Password Link" },
+  { text: "Preparing Your New Credentials" },
+  { text: "Logging You In Securely" },
+];
 import { useRouter } from "next/navigation";
 
 import {
@@ -16,18 +23,22 @@ import {
 } from "@/components/ui/input-otp";
 
 function ForgotPass() {
-  const {contextpassword,contextsetPassword,contextsetIsLoggedIn,contextsetEmail,contextsetName}= useUserContext();
-
+  const {contextsetIsLoggedIn,contextsetEmail,contextsetName}= useUserContext();
+  const [loadings, setLoading] = useState(false);
   const [new_password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-
+const [pass, setPass] = useState("")
   const { toast } = useToast();
   const router = useRouter();
   const [confirm_password, setconfirm_password] = useState("");
   const [otp, setotp] = useState("");
 
-  const handleSubmit = async (e) => {  // Add event parameter 'e'
-    e.preventDefault();  // Call preventDefault on the event object
+  
+
+
+// Your submit handler
+const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/password-reset/`,
@@ -36,34 +47,24 @@ function ForgotPass() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, otp, new_password, confirm_password }),
+          body: JSON.stringify({
+            email,
+            otp,
+            new_password,
+            confirm_password
+          }),
         }
       );
-      
-      if (!response.ok) {
-        toast({
-          title:"Failed to Change Pasword",
-        }); // Handle error properly
-      }
-      console.log(response)
-        const result = await response.json();
-        useEffect(() => {
-
-          contextsetIsLoggedIn(true)
-          contextsetEmail(result.email)
-          contextsetName(result.name)
-        toast({
-          title: "Password Changed Successfully",
-        });
-        Autologin()
-        }, [contextpassword]);
-          
-      
+      setLoading(true)
+     
+      const result = await response.json();
+      setPass(new_password);
+      // The Autologin will be triggered by the useEffect when contextpassword changes
+       
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
   };
-
   const sendOTP = async (e) => {
     e.preventDefault();
 
@@ -133,6 +134,8 @@ toast({
   title: "Successfully logged in",
   description: `Welcome back, ${result.name}!`,
 });
+setLoading(false)
+router.push('/');
 }
 
 
@@ -143,10 +146,14 @@ console.error("Error fetching user info:", error);
 
 };
 
-
+useEffect(() => {
+  
+  loadings&&Autologin();
+}, [pass]);
   const Autologin=async()=>{
 
-
+    const password =pass;
+   
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
     method: 'POST',
     headers: {
@@ -162,20 +169,34 @@ console.error("Error fetching user info:", error);
     toast({
       title: "Some error happend",
     });
+    setLoading(false)
+
   }
 
   const result = await response.json();
   if (response.ok) {
 
     localStorage.setItem('authToken', result.jwt);
+
+    result.jwt&&toast({
+      title: "Password Changed Successfully",
+    })
     getUserInfo()
-    contextsetPassword,("");
+    setPass('');
+    
 
   }
 
   }
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
+      {
+    loadings == true ?<div className="w-full h-[60vh] flex items-center justify-center">
+    {/* Core Loader Modal */}
+    <Loader loadingStates={loadingStates} loading={loadings} duration={1000} />
+
+  </div> :''
+  }
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
         Forgot Password ?
       </h2>
