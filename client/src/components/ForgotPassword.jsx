@@ -1,7 +1,8 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { useToast } from "@/components/ui/use-toast";
-import React, { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { useUserContext } from '@/app/context/Userinfo';
+import React, { useEffect, useState } from "react";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
@@ -15,6 +16,8 @@ import {
 } from "@/components/ui/input-otp";
 
 function ForgotPass() {
+  const {contextpassword,contextsetPassword,contextsetIsLoggedIn,contextsetEmail,contextsetName}= useUserContext();
+
   const [new_password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
@@ -23,7 +26,8 @@ function ForgotPass() {
   const [confirm_password, setconfirm_password] = useState("");
   const [otp, setotp] = useState("");
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {  // Add event parameter 'e'
+    e.preventDefault();  // Call preventDefault on the event object
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/password-reset/`,
@@ -35,20 +39,26 @@ function ForgotPass() {
           body: JSON.stringify({ email, otp, new_password, confirm_password }),
         }
       );
+      
       if (!response.ok) {
-        throw new Error("Failed to Change Pasword"); // Handle error properly
+        toast({
+          title:"Failed to Change Pasword",
+        }); // Handle error properly
       }
-      if (response.ok) {
+      console.log(response)
         const result = await response.json();
+        useEffect(() => {
 
-        //   contextsetIsLoggedIn(true)
-        //   contextsetEmail(result.email)
-        //   contextsetName(result.name)
+          contextsetIsLoggedIn(true)
+          contextsetEmail(result.email)
+          contextsetName(result.name)
         toast({
           title: "Password Changed Successfully",
         });
-        router.push("/Login");
-      }
+        Autologin()
+        }, [contextpassword]);
+          
+      
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
@@ -94,6 +104,76 @@ function ForgotPass() {
     // Update loginInfo context after form submission
   };
 
+  const getUserInfo = async () => {
+       
+           
+    const token = localStorage.getItem('authToken');
+    
+ 
+
+if (!token) return; // Early return if no token exists
+
+try {
+const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
+  method: 'GET',
+  headers: {
+    "Authorization": token,
+    'Content-Type': "application/json",
+  },
+  credentials: 'include',
+});
+
+
+if(response.ok){
+const result = await response.json();
+contextsetIsLoggedIn(true);
+contextsetEmail(result.email);
+contextsetName(result.name);
+toast({
+  title: "Successfully logged in",
+  description: `Welcome back, ${result.name}!`,
+});
+}
+
+
+} catch (error) {
+console.error("Error fetching user info:", error);
+
+}
+
+};
+
+
+  const Autologin=async()=>{
+
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email,
+      password,
+
+    }),
+  })
+  if (!response.ok) {
+    toast({
+      title: "Some error happend",
+    });
+  }
+
+  const result = await response.json();
+  if (response.ok) {
+
+    localStorage.setItem('authToken', result.jwt);
+    getUserInfo()
+    contextsetPassword,("");
+
+  }
+
+  }
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">

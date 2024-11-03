@@ -5,7 +5,7 @@ import NavbarUse from "@/components/Navbar";
 import SessionWrapper from '@/components/SessionWrapper'
 import { Toaster } from "@/components/ui/toaster";
 import { UserProvider } from '@/app/context/Userinfo';
-
+import GetUserInfo from '@/components/GetUserInfo'; 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -42,7 +42,7 @@ export default function RootLayout({
         <main className="bg-grid-white/[0.08] min-h-screen relative">
         <SessionWrapper >
           <NavbarUse />
-          
+          <GetUserInfo/>
           <div className="absolute inset-0 flex items-center justify-center dark:bg-[#050A0F] bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_5%,black)] z-0 pointer-events-none"></div>
           <div className="relative z-10 overflow-auto">
           
