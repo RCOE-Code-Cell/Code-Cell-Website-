@@ -79,6 +79,7 @@ const { data: session } = useSession()
         });
         console.log(result?.message);
         contextsetEmail(email);
+        contextsetPassword(password);
         changetoOTP();
       }
     } catch (error) {
