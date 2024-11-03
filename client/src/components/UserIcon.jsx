@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { useSession ,signOut} from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { AnimatedTooltip } from "./ui/animated-tooltip";
 import { useUserContext } from '@/app/context/Userinfo';
 
