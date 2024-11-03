@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Analytics } from '@vercel/analytics/react';
 import NavbarUse from "@/components/Navbar";
 import SessionWrapper from '@/components/SessionWrapper'
 import { Toaster } from "@/components/ui/toaster";
@@ -47,7 +48,7 @@ export default function RootLayout({
           <div className="relative z-10 overflow-auto">
           
             {children}
-          
+            <Analytics />
             
           </div>
           </SessionWrapper>
