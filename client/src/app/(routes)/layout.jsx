@@ -1,14 +1,20 @@
 "use client"
-import React, {useEffect} from 'react';
+import React, {useEffect,useState} from 'react';
 import { useUserContext } from '@/app/context/Userinfo';
 import { useToast } from "@/hooks/use-toast"
+
 const Layout = ({ children }) => {
     const { toast } = useToast();
 
     const {contextsetIsLoggedIn,contextsetEmail,contextsetName,contextisLoggedIn}= useUserContext();
 
     const getUserInfo = async () => {
-        const token = localStorage.getItem('authToken');
+       
+           
+              const token = localStorage.getItem('authToken');
+              
+           
+          
         if (!token) return; // Early return if no token exists
     
         try {
