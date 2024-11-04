@@ -6,7 +6,7 @@ import {
     InputOTPSeparator,
     InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useToast } from "@/hooks/use-toast"
+import { useToast } from "@/components/ui/use-toast";
 
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';

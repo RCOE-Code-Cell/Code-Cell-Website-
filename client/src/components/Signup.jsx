@@ -89,9 +89,9 @@ const { data: session } = useSession()
       console.error("Error submitting form:", error);
     }
   };
-
+console.log(name,email,password,confirm_password)
   const changetoOTP = () => {
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       setLoading(false)
       router.push('/OTP');
     }, 1000);

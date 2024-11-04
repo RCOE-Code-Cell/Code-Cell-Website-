@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Analytics } from '@vercel/analytics/react';
 import NavbarUse from "@/components/Navbar";
 import SessionWrapper from '@/components/SessionWrapper'
 import { Toaster } from "@/components/ui/toaster";
 import { UserProvider } from '@/app/context/Userinfo';
-
+import GetUserInfo from '@/components/GetUserInfo'; 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -36,18 +37,18 @@ export default function RootLayout({
       </head> */}
       
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
       >
         <UserProvider>
-        <main className="bg-grid-white/[0.08] min-h-screen relative">
+        <main className="bg-grid-black/[0.08] dark:bg-grid-white/[0.08] min-h-screen relative">
         <SessionWrapper >
           <NavbarUse />
-          
+          <GetUserInfo/>
           <div className="absolute inset-0 flex items-center justify-center dark:bg-[#050A0F] bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_5%,black)] z-0 pointer-events-none"></div>
           <div className="relative z-10 overflow-auto">
           
             {children}
-          
+            <Analytics />
             
           </div>
           </SessionWrapper>

@@ -32,7 +32,7 @@ function HeroText() {
           <Image src={image} alt="Aceternity Logo" width={300} height={150} />
          
         </div>
-        <div className={`${isMobile ? "ml-5 sm:ml-0 text-3xl relative" : "text-left"}`}>
+        <div className={`${isMobile ? "ml-5 sm:ml-0 text-2xl relative" : "text-left"}`}>
         {/* <div className=" text-5xl font-semibold text-[#01E6F1] my-5"> &lt;CC_Rcoe/&gt;</div> */}
           Empowering  
           <FlipWords  words={words} /> <br />

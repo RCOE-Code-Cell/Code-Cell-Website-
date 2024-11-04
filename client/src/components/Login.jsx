@@ -144,48 +144,7 @@ function Login() {
   // }
 
 
-  const OAuth = async () => {
-
-
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/oauth2/login/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({ name, email }),
-      });
-
-      if (!response.ok) {
-        toast({
-          title: "Error From backend While Login ",
-        });
-        return;
-      }
-      else{
-        console.log(name,email)
-                router.push('/')
-                toast({
-                  title: "You are Successfully Logged In",
-
-                });
-      }
-
-      const result = await response.json();
-      if (response.ok) {
-
-
-        localStorage.setItem('authToken', result.jwt);
-        Getuserinfo()
-  }
-    } catch (error) {
-      toast({
-        title: "An error occurred",
-      });
-      console.error("Error submitting form:", error);
-    }
-  };
+ 
 
 
   async function loginWithGoogle() {
@@ -220,10 +179,49 @@ function Login() {
 
       setName(session.user.name);
       setEmail(session.user.email);
-      OAuth();
+      
+      
   }
   }, [session]);
+useEffect(() => {
+  if(name !==""){
+    OAuth();
+  }
+},[name,email])
 
+  const OAuth = async () => {
+
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/oauth2/login/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ name, email }),
+      });
+      
+      const result = await response.json();
+  
+      if (response.ok) {
+
+
+        localStorage.setItem('authToken', result.jwt);
+
+
+        result.jwt &&(router.push('/'),
+      toast({
+        title: "You are Successfully Logged In",
+
+      }))
+        Getuserinfo()
+  }
+    } catch (error) {
+     
+      console.error("Error submitting form:", error);
+    }
+  };
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-[#050A0F] mt-[7%]">
