@@ -7,7 +7,7 @@ NEXT_URL="https://code-cell-website.vercel.app/"
 # Number of requests
 REQUESTS=100
 # Number of concurrent users
-CONCURRENCY=10
+CONCURRENCY=100
 
 echo "Testing Django App..."
 ab -n $REQUESTS -c $CONCURRENCY $DJANGO_URL
