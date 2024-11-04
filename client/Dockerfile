@@ -11,6 +11,8 @@ COPY package*.json ./
 RUN npm install
 RUN npm install mini-svg-data-uri
 RUN npx shadcn@latest add toast
+RUN npm install @vercel/analytics
+
 
 # Install Next.js globally (optional, but recommended)
 RUN npm install -g next

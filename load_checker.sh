@@ -5,9 +5,9 @@ DJANGO_URL="https://code-cell-website-fv8m.onrender.com/"
 NEXT_URL="https://code-cell-website.vercel.app/"
 
 # Number of requests
-REQUESTS=100
+REQUESTS=1000
 # Number of concurrent users
-CONCURRENCY=10
+CONCURRENCY=1000
 
 echo "Testing Django App..."
 ab -n $REQUESTS -c $CONCURRENCY $DJANGO_URL
