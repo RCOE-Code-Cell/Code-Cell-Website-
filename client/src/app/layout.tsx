@@ -40,7 +40,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
       >
         <UserProvider>
-        <main className="bg-grid-white/[0.08] min-h-screen relative">
+        <main className="bg-grid-black/[0.08] dark:bg-grid-white/[0.08] min-h-screen relative">
         <SessionWrapper >
           <NavbarUse />
           <GetUserInfo/>
