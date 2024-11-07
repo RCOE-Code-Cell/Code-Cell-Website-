@@ -5,6 +5,8 @@ import random
 import datetime
 from django.utils import timezone
 from events.serializers import EventsRegisteredSerializer
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 class UserSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
@@ -43,13 +45,17 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
 
+        html_message = render_to_string('emails/registeration_otp.html', {'otp': otp})
+        plain_message = strip_tags(html_message)
+
         # Send email with OTP
         send_mail(
             'Your OTP Code',
-            f'Your OTP code is {otp}',
-            'nutriscanofficial@gmail.com',  # Replace with your email
+            plain_message,
+            'codecellrcoe@gmail.com',  # Replace with your email
             [validated_data['email']],
             fail_silently=False,
+            html_message=html_message,
         )
 
         return user

@@ -12,6 +12,8 @@ from django.core.mail import send_mail
 from django.utils.crypto import get_random_string
 from django.core.cache import cache
 import ssl
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 # Disable SSL verification
 ssl._create_default_https_context = ssl._create_unverified_context
 class RegisterView(APIView):
@@ -35,6 +37,19 @@ class RegisterView(APIView):
             user.otp = None
             user.otp_expiration = None
             user.save()
+            html_message = render_to_string('emails/welcome.html', {'name': user.name})
+            plain_message = strip_tags(html_message)
+
+        # Send email with OTP
+            send_mail(
+            f'Welcome {user.name},',
+            plain_message,
+            'codecellrcoe@gmail.com',  # Replace with your email
+            [user.email],
+            fail_silently=False,
+            html_message=html_message,
+            )
+
             return Response({'message': 'User verified successfully'})
         else:
             return Response({'error': 'Invalid OTP or OTP expired'}, status=status.HTTP_400_BAD_REQUEST)
@@ -102,14 +117,17 @@ class PasswordResetRequestView(APIView):
 
         otp = get_random_string(length=6, allowed_chars='0123456789')
         cache.set(f'otp_{email}', otp, timeout=300)  # OTP valid for 5 minutes
+        html_message = render_to_string('emails/password_reset.html', {'otp': otp, 'name': user.name})
+        plain_message = strip_tags(html_message)
 
         send_mail(
-            'Password Reset OTP',
-            f'Your OTP for password reset is {otp}.',
-            'nutriscanofficial@gmail.com',
+            f'Password reset request',
+            plain_message,
+            'codecellrcoe@gmail.com',  # Replace with your email
             [email],
             fail_silently=False,
-        )
+            html_message=html_message,
+            )
         return Response({"message": "OTP sent to your email."}, status=status.HTTP_200_OK)
 
 
@@ -130,6 +148,19 @@ class PasswordResetView(APIView):
             user.set_password(new_password)
             user.save()
             cache.delete(f'otp_{email}')
+            html_message = render_to_string('emails/password_reset_successful.html', {'name': user.name})
+            plain_message = strip_tags(html_message)
+
+            send_mail(
+            f'Password reset succesfully',
+            plain_message,
+            'codecellrcoe@gmail.com',  # Replace with your email
+            [email],
+            fail_silently=False,
+            html_message=html_message,
+            )
+
+
             return Response({"message": "Password reset successful."}, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({"error": "User with this email does not exist."}, status=status.HTTP_400_BAD_REQUEST)
@@ -152,6 +183,18 @@ class OAuthLoginView(APIView):
             user = User.objects.create_user(email=email, name=name, password=None)
             user.is_active = True  # Ensure the user is marked as active
             user.save()
+
+            html_message = render_to_string('emails/welcome.html', { 'name': user.name})
+            plain_message = strip_tags(html_message)
+
+            send_mail(
+            f'Welcome {user.name},',
+            plain_message,
+            'codecellrcoe@gmail.com',  # Replace with your email
+            [user.email],
+            fail_silently=False,
+            html_message=html_message,
+            )
 
         # Generate JWT token
         payload = {
