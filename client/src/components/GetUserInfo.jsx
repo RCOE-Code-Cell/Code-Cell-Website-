@@ -47,9 +47,9 @@ function GetUserInfo() {
        
       };
       useEffect(() => {
-        if(contextisLoggedIn==false){
+
             getUserInfo()
-        }
+        
         
       },[contextisLoggedIn])
   return (
