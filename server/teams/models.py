@@ -3,8 +3,8 @@ from django.db import models
 # Base model for different teams
 class Teams(models.Model):
     name = models.CharField(max_length=255)
-    profile_image = models.ImageField(upload_to='teams/', null=True, blank=True)
-    about = models.CharField(max_length=250)
+    profile_image = models.ImageField(upload_to='teams/', null=True, blank=True, default='/default_profile_image.jpg')  # Default image path
+    about = models.CharField(max_length=250, default='Team Member', blank=True)  # Default bio text
     is_head = models.BooleanField(default=False)
     is_core = models.BooleanField(default=False)
 
