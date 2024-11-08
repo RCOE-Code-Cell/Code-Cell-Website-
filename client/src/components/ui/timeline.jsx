@@ -83,7 +83,7 @@ export const Timeline = ({ data }) => {
           </div>
         ))}
         
-        {/* Background line */}
+
         <div
           style={{
             height: height + "px",
