@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 // Simple utility function to replace cn
 const classNames = (...classes) => {
@@ -10,12 +8,12 @@ const classNames = (...classes) => {
 export const InfiniteMovingCards = ({
   items,
   direction = "right",
-  speed = "fast",
+  speed = "normal",
   pauseOnHover = true,
   className
 }) => {
-  const containerRef = React.useRef(null);
-  const scrollerRef = React.useRef(null);
+  const containerRef = useRef(null);
+  const scrollerRef = useRef(null);
   const [start, setStart] = useState(false);
 
   useEffect(() => {
@@ -30,12 +28,12 @@ export const InfiniteMovingCards = ({
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [items, direction, speed]); // Added direction and speed dependencies
+  }, [items, direction, speed]);
 
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
       // Create enough duplicates to fill the scroll space
-      const itemsNeeded = Math.ceil(window.innerWidth / 300) + 1; // 300px is card width
+      const itemsNeeded = Math.ceil(window.innerWidth / 300) + 2; // 300px is card width
       const duplicatesNeeded = Math.max(2, itemsNeeded);
       
       // Create an array with multiple copies of items
@@ -59,8 +57,8 @@ export const InfiniteMovingCards = ({
                   <h3 class="text-lg font-bold text-white">
                     ${item.name || "Event Title"}
                   </h3>
-                  <p class="mt-2 text-sm text-white/90">
-                    ${item.about || "Event Date"}
+                  <p class="mt-2 text-sm text-white/90 sm:pb-1 pb-5">
+                    ${item.about || "Event About"}
                   </p>
                 </div>
               </div>
@@ -90,11 +88,11 @@ export const InfiniteMovingCards = ({
     if (containerRef.current) {
       let duration;
       if (speed === "fast") {
-        duration = "15s";
+        duration = "10s";
       } else if (speed === "normal") {
-        duration = "40s";
+        duration = "20s";
       } else {
-        duration = "80s";
+        duration = "40s";
       }
       containerRef.current.style.setProperty("--animation-duration", duration);
     }
@@ -114,14 +112,15 @@ export const InfiniteMovingCards = ({
                     className
                 )}
                 style={{
-                    "--animation-duration": "40s",
-                    "--animation-direction": "forwards"
+                    "--animation-duration": "20s",
+                    "--animation-direction": "forwards",
+                    "--animation-iteration-count": "infinite"
                 }}
             >
                 <ul
                     ref={scrollerRef}
                     className={classNames(
-                        "flex min-w-full gap-4 py-4",
+                        "flex min-w-max gap-4 py-4",
                         start && "animate-scroll",
                         pauseOnHover && "hover:[animation-play-state:paused]"
                     )}
