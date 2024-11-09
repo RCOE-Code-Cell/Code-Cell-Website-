@@ -12,13 +12,15 @@ jobs:
       - name: Set up the script
         run: |
           #!/bin/bash
-          RENDER_URL="https://code-cell-website-fv8m.onrender.com"
-
+          
+          # Fetch the Render URL from GitHub Secrets
+          RENDER_URL="${{ secrets.RENDER_URL }}"
+          
           # Function to ping the service and log the result
           ping_service() {
             echo "$(date) - Sending request to $RENDER_URL"
             HTTP_RESPONSE=$(curl -I "$RENDER_URL" -s -o /dev/null -w "%{http_code}")
-
+            
             if [ "$HTTP_RESPONSE" -eq 200 ]; then
               echo "$(date) - Successfully pinged $RENDER_URL, HTTP $HTTP_RESPONSE" >> ~/ping_log.txt
             else
