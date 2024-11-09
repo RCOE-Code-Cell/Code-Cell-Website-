@@ -3,16 +3,30 @@ name: Ping Render Service
 on:
   schedule:
     - cron: "*/15 * * * *"  # Runs every 15 minutes
-  workflow_dispatch:
 
 jobs:
-  ping-job:
+  ping_service:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Run Loop to Ping Render
+      - name: Set up the script
         run: |
-          for i in {1..2}; do
-            echo "$(date) - Pinging Render URL"
-            curl -I "https://code-cell-website-fv8m.onrender.com"
-            sleep 600  # Wait for 10 minutes (600 seconds) between pings
-          done
+          #!/bin/bash
+          RENDER_URL="https://code-cell-website-fv8m.onrender.com"
+
+          # Function to ping the service and log the result
+          ping_service() {
+            echo "$(date) - Sending request to $RENDER_URL"
+            HTTP_RESPONSE=$(curl -I "$RENDER_URL" -s -o /dev/null -w "%{http_code}")
+
+            if [ "$HTTP_RESPONSE" -eq 200 ]; then
+              echo "$(date) - Successfully pinged $RENDER_URL, HTTP $HTTP_RESPONSE" >> ~/ping_log.txt
+            else
+              echo "$(date) - Failed to ping $RENDER_URL, HTTP $HTTP_RESPONSE" >> ~/ping_log.txt
+            fi
+          }
+
+          # Run the ping twice with a 10-minute delay, then stop
+          ping_service
+          sleep 600  # Wait 600 seconds (10 minutes)
+          ping_service
