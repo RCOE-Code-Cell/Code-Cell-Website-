@@ -4,7 +4,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { Timeline } from "@/components/ui/timeline";
-import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
+import  InfiniteMovingCards  from "@/components/ui/infinite-moving-cards";
 
 function Page() {
   const [tech, setTech] = useState([]);

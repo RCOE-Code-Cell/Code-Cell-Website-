@@ -5,10 +5,10 @@ const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ');
 };
 
-export const InfiniteMovingCards = ({
+const InfiniteMovingCards = ({
   items,
   direction = "right",
-  speed = "normal",
+  speed = 20, // Seconds for one full cycle
   pauseOnHover = true,
   className
 }) => {
@@ -34,7 +34,7 @@ export const InfiniteMovingCards = ({
     if (containerRef.current && scrollerRef.current) {
       // Create enough duplicates to fill the scroll space
       const itemsNeeded = Math.ceil(window.innerWidth / 300) + 2; // 300px is card width
-      const duplicatesNeeded = Math.max(2, itemsNeeded);
+      const duplicatesNeeded = Math.max(5, itemsNeeded);
       
       // Create an array with multiple copies of items
       const duplicatedItems = Array(duplicatesNeeded).fill(items).flat();
@@ -69,7 +69,7 @@ export const InfiniteMovingCards = ({
       });
 
       getDirection();
-      getSpeed();
+      setAnimationDuration();
       setStart(true);
     }
   }
@@ -84,16 +84,9 @@ export const InfiniteMovingCards = ({
     }
   };
 
-  const getSpeed = () => {
+  const setAnimationDuration = () => {
     if (containerRef.current) {
-      let duration;
-      if (speed === "fast") {
-        duration = "10s";
-      } else if (speed === "normal") {
-        duration = "20s";
-      } else {
-        duration = "40s";
-      }
+      const duration = `${speed}s`;
       containerRef.current.style.setProperty("--animation-duration", duration);
     }
   };
