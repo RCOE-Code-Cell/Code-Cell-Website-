@@ -5,7 +5,7 @@ from .models import TechTeam, ManagementTeam, MarketingTeam
 class TechTeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = TechTeam
-        fields = ['id', 'name', 'profile_image', 'about', 'is_head', 'is_core']
+        fields = ['id', 'name', 'drive_file_id', 'about', 'is_head', 'is_core']
 
 class ManagementTeamSerializer(serializers.ModelSerializer):
     class Meta:
