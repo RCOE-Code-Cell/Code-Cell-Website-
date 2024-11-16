@@ -8,6 +8,7 @@ class Event(models.Model):
     domain = models.CharField(max_length=255, null=True, blank=True)
     location = models.CharField(max_length=255, null=True, blank=True)
     profile_image = models.ImageField(upload_to='events/', null=True, blank=True)
+    drive_file_id = models.CharField(max_length=255, blank=True, null=True)
     registration_fees = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank=True)
     status = models.BooleanField(default=True)
 

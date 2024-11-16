@@ -46,26 +46,8 @@ class TeamMemberListView(APIView):
         for member in serializer.data:
             profile_image_id = member.get('drive_file_id')  # Assuming this field exists
             if profile_image_id:
-                member['drive_file_id'] = f'/api/teams/{profile_image_id}'
+                member['drive_file_id'] = f'/api/images/{profile_image_id}'
             else:
                 member['drive_file_id'] = None  # Fallback if no image
 
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-class TeamProfileImageView(APIView):
-    def get(self, request, drive_file_id, *args, **kwargs):
-        """
-        Retrieve an image from Google Drive using its file ID.
-        """
-        try:
-            # Download the file from Google Drive
-            file_content, file_metadata = download_from_drive(drive_file_id)
-            mime_type = file_metadata.get('mimeType', 'application/octet-stream')
-
-            # Return the image data as an HTTP response
-            return HttpResponse(file_content, content_type=mime_type)
-
-        except Exception as e:
-            # Handle errors gracefully
-            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

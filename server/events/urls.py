@@ -9,7 +9,7 @@ from django.contrib.staticfiles.urls import  staticfiles_urlpatterns
 urlpatterns = [
     path('event', EventListView.as_view()),
     path('event/<int:pk>/', EventGalleryView.as_view(), name='event-gallery'),
-    path('event/<int:pk>/registered/', EventRegisteredViews.as_view(), name='event')
+    path('event/<int:pk>/registered/', EventRegisteredViews.as_view(), name='event'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

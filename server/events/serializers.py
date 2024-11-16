@@ -32,6 +32,7 @@ class EventSerializer(serializers.ModelSerializer):
     # event_registered_event = EventsRegisteredSerializer()
     images = ImageSerializer(many=True, read_only=True)  # Include images in the event serializer
 
+
     class Meta:
         model = Event
         fields = [
@@ -40,7 +41,8 @@ class EventSerializer(serializers.ModelSerializer):
             'description',
             'date',
             'location',
-            'profile_image',
+            # 'profile_image',
+            'drive_file_id',
             'registration_fees',
             'images',
             'status'

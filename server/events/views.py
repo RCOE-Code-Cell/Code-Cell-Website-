@@ -3,11 +3,20 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Event, EventsRegistered
 from .serializers import EventSerializer, EventsRegisteredSerializer
+from django.http import HttpResponse
+from server.google_drive import download_from_drive
 
 class EventListView(APIView):
     def get(self, request):
         events = Event.objects.all()
         serializer = EventSerializer(events, many=True)
+        for member in serializer.data:
+            profile_image_id = member.get('drive_file_id')  # Assuming this field exists
+            if profile_image_id:
+                member['drive_file_id'] = f'/api/images/{profile_image_id}'
+            else:
+                member['drive_file_id'] = None  # Fallback if no image
+
         return Response(serializer.data)
 
 class EventGalleryView(APIView):
