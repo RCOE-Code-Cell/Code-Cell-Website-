@@ -18,6 +18,7 @@ class Event(models.Model):
 class Image(models.Model):
     gallery = models.ForeignKey(Event, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='galleries/', null=True, blank=True)
+    drive_file_id = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f"Image for {self.gallery.name}"
