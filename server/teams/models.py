@@ -27,3 +27,14 @@ class ManagementTeam(Teams):
 class MarketingTeam(Teams):
     def __str__(self):
         return self.name
+
+
+class Head(Teams):
+    def __str__(self):
+        return self.name
+
+
+class Professors(Teams):
+    def __str__(self):
+        return self.name
+

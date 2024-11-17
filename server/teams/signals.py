@@ -1,11 +1,13 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import TechTeam, ManagementTeam, MarketingTeam
+from .models import TechTeam, ManagementTeam, MarketingTeam,Head, Professors
 from server.google_drive import upload_to_drive  # Assuming you have this function to upload files
 
 @receiver(post_save, sender=TechTeam)
 @receiver(post_save, sender=ManagementTeam)
 @receiver(post_save, sender=MarketingTeam)
+@receiver(post_save, sender=Head)
+@receiver(post_save, sender=Professors)
 def upload_image_to_drive(sender, instance, created, **kwargs):
     """
     Signal to automatically upload the profile image to Google Drive when a TechTeam, ManagementTeam, or MarketingTeam instance is created or updated.

@@ -1,8 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from .models import TechTeam, ManagementTeam, MarketingTeam
-from .serializers import TechTeamSerializer, ManagementTeamSerializer, MarketingTeamSerializer
+from .models import TechTeam, ManagementTeam, MarketingTeam , Head, Professors
+from .serializers import TechTeamSerializer, ManagementTeamSerializer, MarketingTeamSerializer , HeadSerializer , ProfessorsSerializer
 from django.http import HttpResponse
 from server.google_drive import download_from_drive
 
@@ -38,6 +38,39 @@ class TeamMemberListView(APIView):
 
         # Get queryset based on filter criteria
         queryset = model.objects.filter(**filter_criteria)
+
+        # Serialize data
+        serializer = serializer_class(queryset, many=True)
+
+        # Update profile_image field with the endpoint URL
+        for member in serializer.data:
+            profile_image_id = member.get('drive_file_id')  # Assuming this field exists
+            if profile_image_id:
+                member['drive_file_id'] = f'/api/images/{profile_image_id}'
+            else:
+                member['drive_file_id'] = None  # Fallback if no image
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+class ProffesorHeadListView(APIView):
+    def get(self, request, proffession_type):
+        # Map team_type to models and serializers
+        model_serializer_map = {
+            'head': (Head, HeadSerializer),
+            'professors': (Professors, ProfessorsSerializer),
+        }
+        model, serializer_class = model_serializer_map.get(proffession_type, (None, None))
+
+        if not model or not serializer_class:
+            return Response(
+                {"error": "it is not head or not proffesors"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Get queryset based on filter criteria
+        queryset = model.objects.all()
 
         # Serialize data
         serializer = serializer_class(queryset, many=True)

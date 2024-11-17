@@ -30,7 +30,10 @@ def upload_image_to_drive(sender, instance, created, **kwargs):
         # Only upload if the drive_file_id is not already set or if it's a new image
         if not instance.drive_file_id:
             file_path = instance.image.path
-            drive_file_id = upload_to_drive(file_path, instance.id)  # Upload function, assumes it returns file ID
+            event_name = instance.gallery.name  # Corresponding event's name
+            event_id = instance.id      # Corresponding event's ID
+            file_name = f"{event_name}_{event_id}"
+            drive_file_id = upload_to_drive(file_path, file_name)  # Upload function, assumes it returns file ID
 
             # Update the model with the Google Drive file ID
             instance.drive_file_id = drive_file_id
