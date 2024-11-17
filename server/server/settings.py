@@ -24,7 +24,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     '0.0.0.0',
-    'code-cell-website-fv8m.onrender.com',
+    'code-cell-website-fv8m.onrender.com',     #testing
+    'code-cell-website.onrender.com'           # production
     ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
