@@ -6,10 +6,12 @@ from server.google_drive import upload_to_drive  # Assuming you have this functi
 
 @receiver(post_save, sender=Event)
 
-def upload_image_to_drive(sender, instance, created, **kwargs):
+def upload_image_to_drive(sender, instance, created,raw, **kwargs):
     """
     Signal to automatically upload the profile image to Google Drive when a TechTeam, ManagementTeam, or MarketingTeam instance is created or updated.
     """
+    if raw:  # Skip the signal during loaddata
+        return
     if instance.profile_image:  # Check if profile_image is set
         # Only upload if the drive_file_id is not already set or if it's a new image
         if not instance.drive_file_id:
@@ -22,10 +24,12 @@ def upload_image_to_drive(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=Image)
 
-def upload_image_to_drive(sender, instance, created, **kwargs):
+def upload_image_to_drive(sender, instance, created,raw, **kwargs):
     """
     Signal to automatically upload the profile image to Google Drive when a TechTeam, ManagementTeam, or MarketingTeam instance is created or updated.
     """
+    if raw:  # Skip the signal during loaddata
+        return
     if instance.image:  # Check if profile_image is set
         # Only upload if the drive_file_id is not already set or if it's a new image
         if not instance.drive_file_id:

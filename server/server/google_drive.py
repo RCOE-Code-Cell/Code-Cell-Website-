@@ -6,7 +6,7 @@ from googleapiclient.http import MediaIoBaseDownload, MediaFileUpload
 
 # Google Drive Settings
 SCOPES = ['https://www.googleapis.com/auth/drive']
-PARENT_FOLDER_ID = "1T05uwPTcFTiseSBLwNktXqNRRHjilKvf"  # Update with your folder ID
+PARENT_FOLDER_ID = "11NFodohETh5yfCqIlwr9BUsQcwMPssux"  # Update with your folder ID
 
 
 def authenticate():
