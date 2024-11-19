@@ -52,7 +52,7 @@ class UserSerializer(serializers.ModelSerializer):
         send_mail(
             'Your OTP Code',
             plain_message,
-            'codecellrcoe@gmail.com',  # Replace with your email
+            'codecell@eng.rizvi.edu.in',  # Replace with your email
             [validated_data['email']],
             fail_silently=False,
             html_message=html_message,
