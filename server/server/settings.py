@@ -29,12 +29,14 @@ ALLOWED_HOSTS = [
     ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    'https://code-cell-website.vercel.app/',
+    'https://code-cell-website.vercel.app/',  # testing
+    'https://rcoecodecell.vercel.app/'        #production
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
-    'https://code-cell-website.vercel.app/',
+    'https://code-cell-website.vercel.app/',  # testing
+    'https://rcoecodecell.vercel.app/',       #production
 ]
 
 CORS_ALLOW_CREDENTIALS = True

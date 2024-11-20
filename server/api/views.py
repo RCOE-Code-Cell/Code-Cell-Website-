@@ -44,7 +44,7 @@ class RegisterView(APIView):
             send_mail(
             f'Welcome {user.name},',
             plain_message,
-            'codecellrcoe@gmail.com',  # Replace with your email
+            'codecell@eng.rizvi.edu.in',  # Replace with your email
             [user.email],
             fail_silently=False,
             html_message=html_message,
@@ -123,7 +123,7 @@ class PasswordResetRequestView(APIView):
         send_mail(
             f'Password reset request',
             plain_message,
-            'codecellrcoe@gmail.com',  # Replace with your email
+            'codecell@eng.rizvi.edu.in',  # Replace with your email
             [email],
             fail_silently=False,
             html_message=html_message,
@@ -154,7 +154,7 @@ class PasswordResetView(APIView):
             send_mail(
             f'Password reset succesfully',
             plain_message,
-            'codecellrcoe@gmail.com',  # Replace with your email
+            'codecell@eng.rizvi.edu.in',  # Replace with your email
             [email],
             fail_silently=False,
             html_message=html_message,
@@ -190,7 +190,7 @@ class OAuthLoginView(APIView):
             send_mail(
             f'Welcome {user.name},',
             plain_message,
-            'codecellrcoe@gmail.com',  # Replace with your email
+            'codecell@eng.rizvi.edu.in',  # Replace with your email
             [user.email],
             fail_silently=False,
             html_message=html_message,
