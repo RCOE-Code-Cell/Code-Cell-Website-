@@ -163,7 +163,11 @@ function Login() {
   async function loginWithGithub() {
     setLoading(true);
 
+
+
     try {
+
+
       await signIn('github')
     } catch (error) {
       // display error message to user
@@ -176,9 +180,9 @@ function Login() {
   useEffect(() => {
 
     if (session) {
-
-      setName(session.user.name);
       setEmail(session.user.email);
+      setName(session.user.name);
+      
       
       
   }
