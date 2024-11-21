@@ -217,7 +217,7 @@ function Page() {
   "mx-auto my-3", // Consistent spacing
   "bg-cover bg-center bg-no-repeat",
   "transition-all duration-300"               )}
-               style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}${item.profile_image}')` }}
+               style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}${item.drive_file_id}')` }}
              >
                <div className="absolute inset-0 bg-black opacity-0 group-hover/card:opacity-40 transition-opacity duration-300"></div> {/* Background overlay */}
                <div className="absolute inset-0 flex flex-col justify-end  items-center text-white p-4 z-10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
@@ -263,7 +263,7 @@ function Page() {
   "mx-auto my-3", // Consistent spacing
   "bg-cover bg-center bg-no-repeat",
   "transition-all duration-300"               )}
-               style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}${item.profile_image}')` }}
+               style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}${item.drive_file_id}')` }}
              >
                <div className="absolute inset-0 bg-black opacity-0 group-hover/card:opacity-40 transition-opacity duration-300"></div> {/* Background overlay */}
                <div className="absolute inset-0 flex flex-col justify-end  items-center text-white p-4 z-10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
@@ -305,7 +305,7 @@ function Page() {
   "mx-auto my-3", // Consistent spacing
   "bg-cover bg-center bg-no-repeat",
   "transition-all duration-300"               )}
-               style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}${item.profile_image}')` }}
+               style={{ backgroundImage: `url('${process.env.NEXT_PUBLIC_API_URL}${item.drive_file_id}')` }}
              >
                <div className="absolute inset-0 bg-black opacity-0 group-hover/card:opacity-40 transition-opacity duration-300"></div> {/* Background overlay */}
                <div className="absolute inset-0 flex flex-col justify-end  items-center text-white p-4 z-10 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">

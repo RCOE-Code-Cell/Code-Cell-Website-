@@ -51,7 +51,7 @@ const InfiniteMovingCards = ({
           <div class="group relative sm:w-[300px] w-[150px] h-[150px] sm:h-[250px] overflow-hidden rounded-lg">
             <div
               class="h-[200px] w-full bg-cover bg-center transition-all duration-500 group-hover:scale-105"
-              style="background-image: url('${process.env.NEXT_PUBLIC_API_URL}${item.profile_image}')"
+              style="background-image: url('${process.env.NEXT_PUBLIC_API_URL}${item.drive_file_id}')"
             >
               <div class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <div class="flex h-full flex-col justify-end sm:p-4 p-8">
