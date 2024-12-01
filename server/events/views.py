@@ -10,12 +10,12 @@ class EventListView(APIView):
     def get(self, request):
         events = Event.objects.all()
         serializer = EventSerializer(events, many=True)
-        for member in serializer.data:
-            profile_image_id = member.get('drive_file_id')  # Assuming this field exists
-            if profile_image_id:
-                member['drive_file_id'] = f'/api/images/{profile_image_id}'
-            else:
-                member['drive_file_id'] = None  # Fallback if no image
+        # for member in serializer.data:
+        #     profile_image_id = member.get('drive_file_id')  # Assuming this field exists
+        #     if profile_image_id:
+        #         member['drive_file_id'] = f'/api/images/{profile_image_id}'
+        #     else:
+        #         member['drive_file_id'] = None  # Fallback if no image
 
         return Response(serializer.data)
 

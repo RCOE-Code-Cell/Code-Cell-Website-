@@ -3,7 +3,9 @@ import io
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
 from googleapiclient.http import MediaIoBaseDownload, MediaFileUpload
+from dotenv import load_dotenv
 
+load_dotenv()
 # Google Drive Settings
 SCOPES = ['https://www.googleapis.com/auth/drive']
 PARENT_FOLDER_ID = "11NFodohETh5yfCqIlwr9BUsQcwMPssux"  # Update with your folder ID
@@ -39,20 +41,32 @@ def upload_to_drive(file_path, file_name):
     file = service.files().create(body=file_metadata, media_body=media).execute()
     return file.get('id')
 
-
 def download_from_drive(file_id):
-    """Download a file from Google Drive and return its content and metadata."""
+    """Download a file from Google Drive and return its content, metadata, and public URL."""
     creds = authenticate()
     service = build('drive', 'v3', credentials=creds)
 
+    # Get file metadata
     file_metadata = service.files().get(fileId=file_id, fields='name, mimeType').execute()
-    request = service.files().get_media(fileId=file_id)
-    fh = io.BytesIO()
-    downloader = MediaIoBaseDownload(fh, request)
 
-    done = False
-    while not done:
-        status, done = downloader.next_chunk()
+    # Set file permission to public
+    try:
+        permission = {
+            'type': 'anyone',
+            'role': 'reader',
+        }
+        service.permissions().create(fileId=file_id, body=permission).execute()
+    except Exception as e:
+        print(f"Failed to set public permissions: {e}")
 
-    fh.seek(0)
-    return fh, file_metadata
+    # Generate public URL
+    public_url = f"https://drive.google.com/uc?id={file_id}&export=view"
+    print(public_url)
+
+    return public_url, file_metadata
+
+
+
+if __name__ == '__main__':
+    # Usage example
+    download_from_drive('17dtAv2nN4mtiPttXSrLRndfZjYDRnQ5X')

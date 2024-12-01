@@ -41,15 +41,6 @@ class TeamMemberListView(APIView):
 
         # Serialize data
         serializer = serializer_class(queryset, many=True)
-
-        # Update profile_image field with the endpoint URL
-        for member in serializer.data:
-            profile_image_id = member.get('drive_file_id')  # Assuming this field exists
-            if profile_image_id:
-                member['drive_file_id'] = f'/api/images/{profile_image_id}'
-            else:
-                member['drive_file_id'] = None  # Fallback if no image
-
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -74,13 +65,5 @@ class ProffesorHeadListView(APIView):
 
         # Serialize data
         serializer = serializer_class(queryset, many=True)
-
-        # Update profile_image field with the endpoint URL
-        for member in serializer.data:
-            profile_image_id = member.get('drive_file_id')  # Assuming this field exists
-            if profile_image_id:
-                member['drive_file_id'] = f'/api/images/{profile_image_id}'
-            else:
-                member['drive_file_id'] = None  # Fallback if no image
 
         return Response(serializer.data, status=status.HTTP_200_OK)

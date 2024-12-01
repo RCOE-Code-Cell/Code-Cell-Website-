@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import TechTeam, ManagementTeam, MarketingTeam,Head, Professors
-from server.google_drive import upload_to_drive  # Assuming you have this function to upload files
+from server.google_drive import upload_to_drive, download_from_drive # Assuming you have this function to upload files
 
 @receiver(post_save, sender=TechTeam)
 @receiver(post_save, sender=ManagementTeam)
@@ -21,5 +21,5 @@ def upload_image_to_drive(sender, instance, created, raw, **kwargs):
             drive_file_id = upload_to_drive(file_path, instance.name)  # Upload function, assumes it returns file ID
 
             # Update the model with the Google Drive file ID
-            instance.drive_file_id = drive_file_id
+            instance.drive_file_id,_ = download_from_drive(drive_file_id)
             instance.save(update_fields=['drive_file_id'])  # Save only the updated field
