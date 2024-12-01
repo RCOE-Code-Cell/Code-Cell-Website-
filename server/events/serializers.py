@@ -2,14 +2,11 @@ from rest_framework import serializers
 from .models import Event, Image, EventsRegistered
 
 class ImageSerializer(serializers.ModelSerializer):
-    drive_file_url = serializers.SerializerMethodField()
+    # drive_file_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Image
-        fields = ['id', 'drive_file_url']
-
-    def get_drive_file_url(self, obj):
-        return f"/api/images/{obj.drive_file_id}"
+        fields = ['id', 'drive_file_id']
 
 
 class EventsRegisteredSerializer(serializers.ModelSerializer):
