@@ -39,6 +39,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     'https://code-cell-website.vercel.app/',  # testing
     'https://rcoecodecell.vercel.app/',       #production
+     'https://templetrepo.vercel.app/', #template
 ]
 
 CORS_ALLOW_CREDENTIALS = True
