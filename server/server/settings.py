@@ -25,12 +25,14 @@ ALLOWED_HOSTS = [
     'localhost',
     '0.0.0.0',
     'code-cell-website-fv8m.onrender.com',     #testing
-    'code-cell-website.onrender.com'           # production
+    'code-cell-website.onrender.com',        # production
+  
     ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     'https://code-cell-website.vercel.app/',  # testing
-    'https://rcoecodecell.vercel.app/'        #production
+    'https://rcoecodecell.vercel.app/' ,       #production
+    'https://templetrepo.vercel.app/', #template 
 ]
 
 CSRF_TRUSTED_ORIGINS = [
